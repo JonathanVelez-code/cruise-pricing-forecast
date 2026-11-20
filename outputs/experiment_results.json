@@ -1,0 +1,30 @@
+{
+  "rule": "Raise a category's price 5% when it is >= 70% booked at 60 days out",
+  "randomization_unit": "sailing",
+  "eligible_sailings": 300,
+  "control_sailings": 145,
+  "treatment_sailings": 155,
+  "eligible_sailing_categories": 677,
+  "control_revpac": 1704.04,
+  "treatment_revpac": 1647.78,
+  "raw_lift_pct": -3.3,
+  "raw_p_value": 0.3657,
+  "raw_ci_95_pct": [
+    -10.11,
+    4.26
+  ],
+  "cuped_lift_pct": -0.83,
+  "cuped_p_value": 0.33,
+  "cuped_ci_95_pct": [
+    -2.53,
+    0.79
+  ],
+  "cuped_variance_reduction_pct": 94.8,
+  "min_detectable_lift_pct": 2.38,
+  "sailings_per_arm_to_detect_0.5pct": 3349,
+  "decision": "Inconclusive: no significant lift. Don't roll out broadly. Next, test a larger price step only on categories forecast to sell out, where demand exceeds cabins.",
+  "guardrail_control_occupancy_pct": 96.09,
+  "guardrail_treatment_occupancy_pct": 95.1,
+  "assumed_elasticity": "normal(mean -0.9, sd 0.4) per sailing",
+  "assumed_spill": "sold-out categories had 0-25% more late demand than cabins"
+}

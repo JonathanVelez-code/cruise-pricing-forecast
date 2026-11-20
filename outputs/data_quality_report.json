@@ -1,0 +1,14 @@
+{
+  "raw_rows": 512207,
+  "category_text_fixed": 2555,
+  "unknown_category_dropped": 0,
+  "duplicates_dropped": 1018,
+  "unknown_sailing_dropped": 0,
+  "booked_after_sailing_dropped": 40,
+  "nonpositive_price_dropped": 30,
+  "missing_price_imputed": 511,
+  "missing_price_unfillable_dropped": 0,
+  "status_cancel_date_mismatch": 0,
+  "clean_rows": 511119,
+  "rows_removed": 1088
+}

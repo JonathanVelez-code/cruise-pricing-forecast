@@ -1,0 +1,14 @@
+feature,importance
+month,0.3493724
+is_holiday,0.20039828
+otb_pct,0.09388391
+week_of_year,0.092460215
+horizon,0.06342319
+ly_final_pct,0.034232114
+pace_vs_ly,0.033703305
+cabins_available,0.0329372
+category_code,0.023457155
+nights,0.023308974
+ship_id,0.022998434
+avg_price_otb,0.0209945
+ly_otb_pct,0.008830324
