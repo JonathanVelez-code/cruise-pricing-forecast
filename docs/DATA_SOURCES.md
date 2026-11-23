@@ -8,33 +8,35 @@ This project uses **two layers of data**:
 The real data is used to **calibrate** the synthetic bookings, to **benchmark** them, and to train and test a **real-data forecast** of each company's revenue per passenger day.
 
 > All data is public. The project isn't affiliated with or endorsed by any company named here.
+>
+> **Every number can be traced to its source.** Each source below is linked, [§10](#10-references) has formal citations, and **[SEC_FILINGS.md](SEC_FILINGS.md) lists all 102 SEC filings used, each with a direct link to the document on EDGAR.** Data was retrieved in November 2026.
 
 ---
 
 ## 1. Companies
 
-| Company | Ticker | SEC CIK | Main brands | Fiscal year ends | Capacity metric in filings | Quarters collected |
-|---|---|---|---|---|---|---|
-| **Royal Caribbean Cruises Ltd.** (Royal Caribbean Group) | RCL | 0000884887 | Royal Caribbean International, Celebrity Cruises, Silversea | Dec 31 | APCD (available passenger cruise days) | **39** (Q1 2017 – Q3 2026) |
-| **Norwegian Cruise Line Holdings Ltd.** | NCLH | 0001513761 | Norwegian Cruise Line, Oceania Cruises, Regent Seven Seas | Dec 31 | Capacity Days | **34** (Q1 2016 – Q3 2026) |
-| **Carnival Corporation & plc** | CCL | 0000815097 | Carnival Cruise Line, Princess, Holland America, AIDA, Costa, P&O, Cunard, Seabourn | Nov 30 | ALBDs (available lower berth days) | **29** (Aug 2016 – Aug 2026) |
+| Company | Ticker | SEC CIK | Main brands | Fiscal year ends | Capacity metric in filings | Quarters collected | Filings on EDGAR |
+|---|---|---|---|---|---|---|---|
+| **Royal Caribbean Cruises Ltd.** (Royal Caribbean Group) | RCL | [0000884887](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000884887&type=10-&dateb=&owner=include&count=40) | Royal Caribbean International, Celebrity Cruises, Silversea | Dec 31 | APCD (available passenger cruise days) | **39** (Q1 2017 – Q3 2026) | [30 10-Qs + 9 10-Ks](SEC_FILINGS.md#royal-caribbean-cruises-ltd-cik-0000884887) |
+| **Norwegian Cruise Line Holdings Ltd.** | NCLH | [0001513761](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001513761&type=10-&dateb=&owner=include&count=40) | Norwegian Cruise Line, Oceania Cruises, Regent Seven Seas | Dec 31 | Capacity Days | **34** (Q1 2016 – Q3 2026) | [28 10-Qs + 6 10-Ks](SEC_FILINGS.md#norwegian-cruise-line-holdings-ltd-cik-0001513761) |
+| **Carnival Corporation & plc** | CCL | [0000815097](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000815097&type=10-&dateb=&owner=include&count=40) | Carnival Cruise Line, Princess, Holland America, AIDA, Costa, P&O, Cunard, Seabourn | Nov 30 | ALBDs (available lower berth days) | **29** (Aug 2016 – Aug 2026) | [26 10-Qs + 3 10-Ks](SEC_FILINGS.md#carnival-corporation--plc-cik-0000815097) |
 
-**Total: 102 company-quarters**, extracted from about **130 SEC filings** (10-Qs and 10-Ks). Of these, **83** are normal-operations quarters. The 19 quarters from March 2020 to December 2022 are flagged as COVID-19, when sailings were suspended and then ramped back up.
+**Total: 102 company-quarters**, taken from **102 SEC filings** (84 10-Qs and 18 10-Ks; [full list with links](SEC_FILINGS.md)). About 130 filings were downloaded; the rest were older or didn't report the statistics in a usable table. Of these, **83** are normal-operations quarters. The 19 quarters from March 2020 to December 2022 are flagged as COVID-19, when sailings were suspended and then ramped back up.
 
 ---
 
 ## 2. Sources
 
-| # | Source | What it provides | How it's accessed | Coverage |
-|---|---|---|---|---|
-| 1 | **SEC EDGAR: filing index** | The list of each company's 10-Q and 10-K filings (accession number, period, document name) | `https://data.sec.gov/submissions/CIK##########.json` | 2016 – Nov 2026 |
-| 2 | **SEC EDGAR: filing documents** | Operating statistics tables in each quarterly (10-Q) and annual (10-K) report: passengers carried, passenger cruise days, capacity, occupancy | `https://www.sec.gov/Archives/edgar/data/{CIK}/{accession}/{document}.htm` | About 130 filings |
-| 3 | **SEC XBRL "company facts" API** | Total revenue per quarter, as tagged in the financial statements | `https://data.sec.gov/api/xbrl/companyfacts/CIK##########.json` | 2016 – Q3 2026 |
-| 4 | **U.S. Bureau of Labor Statistics (BLS) Public API** | CPI for **airline fares** (series `CUSR0000SETG01`, seasonally adjusted) and the **unemployment rate** (`LNS14000000`) | `https://api.bls.gov/publicAPI/v1/timeseries/data/` | Jan 2015 – Oct 2026 (monthly) |
-| 5 | **University of Michigan Surveys of Consumers** | **Index of Consumer Sentiment** (ICS) | `https://www.sca.isr.umich.edu/files/tbmics.csv` Jan 2014 – Nov 2026 used (monthly) |
+| # | Source | What it provides | Where to see it | How the code reads it | Coverage |
+|---|---|---|---|---|---|
+| 1 | **SEC EDGAR: filing index** ([about the API](https://www.sec.gov/search-filings/edgar-application-programming-interfaces)) | The list of each company's 10-Q and 10-K filings (accession number, period, document name) | [Royal Caribbean](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000884887&type=10-&dateb=&owner=include&count=40) · [Norwegian](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001513761&type=10-&dateb=&owner=include&count=40) · [Carnival](https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000815097&type=10-&dateb=&owner=include&count=40) | [CIK0000884887.json](https://data.sec.gov/submissions/CIK0000884887.json) · [CIK0001513761.json](https://data.sec.gov/submissions/CIK0001513761.json) · [CIK0000815097.json](https://data.sec.gov/submissions/CIK0000815097.json) | 2016 – Nov 2026 |
+| 2 | **SEC EDGAR: filing documents** | Operating statistics tables in each quarterly (10-Q) and annual (10-K) report: passengers carried, passenger cruise days, capacity, occupancy | **[SEC_FILINGS.md](SEC_FILINGS.md): every filing used, with a direct link** | `https://www.sec.gov/Archives/edgar/data/{CIK}/{accession}/{document}.htm` | 102 filings |
+| 3 | **SEC XBRL "company facts" API** | Total revenue per quarter, as tagged in the financial statements | Revenue in each filing's income statement | [Royal Caribbean](https://data.sec.gov/api/xbrl/companyfacts/CIK0000884887.json) · [Norwegian](https://data.sec.gov/api/xbrl/companyfacts/CIK0001513761.json) · [Carnival](https://data.sec.gov/api/xbrl/companyfacts/CIK0000815097.json) | 2016 – Q3 2026 |
+| 4 | **U.S. Bureau of Labor Statistics (BLS)** ([Public API](https://www.bls.gov/developers/)) | CPI for **airline fares**, U.S. city average, seasonally adjusted (series `CUSR0000SETG01`) and the **unemployment rate** (`LNS14000000`) | [CUSR0000SETG01](https://data.bls.gov/timeseries/CUSR0000SETG01) · [LNS14000000](https://data.bls.gov/timeseries/LNS14000000) | `https://api.bls.gov/publicAPI/v1/timeseries/data/` | Jan 2015 – Oct 2026 (monthly) |
+| 5 | **University of Michigan, Surveys of Consumers** | **Index of Consumer Sentiment** (ICS) | [Surveys of Consumers](https://www.sca.isr.umich.edu/) · [data tables](https://www.sca.isr.umich.edu/tables.html) | [tbmics.csv](https://www.sca.isr.umich.edu/files/tbmics.csv) | Jan 2014 – Nov 2026 used (monthly) |
 
 **Notes:**
-- The SEC asks automated tools to identify themselves. The script sends a descriptive User-Agent, which you can set with `SEC_USER_AGENT`, and waits between requests to stay well under the SEC's 10-requests-per-second limit.
+- The SEC asks automated tools to identify themselves ([SEC fair access policy](https://www.sec.gov/os/accessing-edgar-data)). The script sends a descriptive User-Agent, which you can set with `SEC_USER_AGENT`, and waits between requests to stay well under the SEC's 10-requests-per-second limit.
 - BLS didn't publish one month (October 2025, during the federal government shutdown). The script skips that month instead of inventing a value.
 - FRED (St. Louis Fed) carries the same economic series, but its download endpoint times out for scripts, so the original BLS and Michigan sources are used directly.
 
@@ -74,20 +76,22 @@ The real data is used to **calibrate** the synthetic bookings, to **benchmark** 
 
 **The latest quarter for each company:**
 
-| Company | Quarter ending | Passengers | Passenger cruise days | Capacity days | Occupancy | Total revenue | Revenue per PCD |
-|---|---|---:|---:|---:|---:|---:|---:|
-| Royal Caribbean | Sep 30, 2026 | 2,676,480 | 16,692,392 | 14,844,688 | **112.4%** | $5.59 B | **$334.94** |
-| Norwegian | Sep 30, 2026 | 983,214 | 7,204,938 | 6,766,454 | **106.5%** | $2.95 B | **$408.99** |
-| Carnival | Aug 31, 2026 | 3.9 M | 27.9 M | 24.9 M | **111.8%** | $8.44 B | **$302.33** |
+| Company | Quarter ending | Passengers | Passenger cruise days | Capacity days | Occupancy | Total revenue | Revenue per PCD | Source filing |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| Royal Caribbean | Sep 30, 2026 | 2,676,480 | 16,692,392 | 14,844,688 | **112.4%** | $5.59 B | **$334.94** | [10-Q, filed Oct 27, 2026](https://www.sec.gov/Archives/edgar/data/884887/000088488726000044/rcl-20260930.htm) |
+| Norwegian | Sep 30, 2026 | 983,214 | 7,204,938 | 6,766,454 | **106.5%** | $2.95 B | **$408.99** | [10-Q, filed Oct 29, 2026](https://www.sec.gov/Archives/edgar/data/1513761/000110465926120217/nclh-20260930x10q.htm) |
+| Carnival | Aug 31, 2026 | 3.9 M | 27.9 M | 24.9 M | **111.8%** | $8.44 B | **$302.33** | [10-Q, filed Sep 29, 2026](https://www.sec.gov/Archives/edgar/data/815097/000081509726000107/ccl-20260831.htm) |
 
 **Royal Caribbean, 2019, before COVID-19:**
 
-| Quarter | Source | Occupancy | Total revenue | Revenue per PCD |
-|---|---|---:|---:|---:|
-| Q1 2019 | 10-Q | 107.1% | $2.44 B | $231.00 |
-| Q2 2019 | 10-Q | 108.5% | $2.81 B | $247.90 |
-| Q3 2019 | 10-Q | 110.5% | $3.19 B | $268.63 |
-| Q4 2019 | 10-K − Q3 YTD | 106.3% | $2.52 B | $227.67 |
+| Quarter | Source | Occupancy | Total revenue | Revenue per PCD | Source filing |
+|---|---|---:|---:|---:|---|
+| Q1 2019 | 10-Q | 107.1% | $2.44 B | $231.00 | [10-Q, filed May 2, 2019](https://www.sec.gov/Archives/edgar/data/884887/000088488719000023/final2019q110q.htm) |
+| Q2 2019 | 10-Q | 108.5% | $2.81 B | $247.90 | [10-Q, filed Jul 26, 2019](https://www.sec.gov/Archives/edgar/data/884887/000088488719000042/a2019q210q.htm) |
+| Q3 2019 | 10-Q | 110.5% | $3.19 B | $268.63 | [10-Q, filed Oct 30, 2019](https://www.sec.gov/Archives/edgar/data/884887/000088488719000046/a2019q310q.htm) |
+| Q4 2019 | 10-K − Q3 YTD | 106.3% | $2.52 B | $227.67 | [10-K, filed Feb 25, 2020](https://www.sec.gov/Archives/edgar/data/884887/000088488720000009/rcl-20191231.htm) minus the Q3 10-Q above |
+
+To check a number yourself: open the filing and search for "Passenger Cruise Days" or "Occupancy". The operating statistics table is in Management's Discussion and Analysis.
 
 ---
 
@@ -153,6 +157,7 @@ This forecasts **next quarter's revenue per passenger cruise day** for each comp
 $env:SEC_USER_AGENT = "Your Name your-email@example.com"   # the SEC asks automated clients to identify themselves
 python -m src.sec_cruise_data    # downloads and parses the filings (a few minutes the first time; cached after)
 python -m src.real_forecast      # downloads BLS + Michigan data, runs the walk-forward test
+python -m src.sec_citations      # rebuilds docs/SEC_FILINGS.md and outputs/sec_filings_used.csv from the cache
 python -m src.pipeline           # everything else, including calibration, charts and Power BI tables
 ```
 
@@ -167,3 +172,33 @@ python -m src.pipeline           # everything else, including calibration, chart
 **Fiscal calendars differ.** Carnival's quarters end in Feb, May, Aug and Nov, and are matched to the nearest calendar quarter.
 
 **There isn't much data:** about 60 usable company-quarters for the forecast, after removing COVID-19 quarters and the quarters with no same-quarter-last-year value. Every result is checked against simple baselines on quarters the model never saw.
+
+---
+
+## 10. References
+
+All sources were retrieved in November 2026.
+
+**Company filings: U.S. Securities and Exchange Commission, EDGAR**
+
+1. Royal Caribbean Cruises Ltd. (2017–2026). *Forms 10-Q and 10-K, fiscal years 2017–2026* (CIK 0000884887). U.S. Securities and Exchange Commission. https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000884887&type=10-&dateb=&owner=include&count=40
+2. Norwegian Cruise Line Holdings Ltd. (2016–2026). *Forms 10-Q and 10-K, fiscal years 2016–2026* (CIK 0001513761). U.S. Securities and Exchange Commission. https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001513761&type=10-&dateb=&owner=include&count=40
+3. Carnival Corporation & plc (2016–2026). *Forms 10-Q and 10-K, fiscal years 2016–2026* (CIK 0000815097). U.S. Securities and Exchange Commission. https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000815097&type=10-&dateb=&owner=include&count=40
+4. Royal Caribbean Cruises Ltd. (2026). *Form 10-Q for the quarterly period ended September 30, 2026*. U.S. Securities and Exchange Commission. https://www.sec.gov/Archives/edgar/data/884887/000088488726000044/rcl-20260930.htm
+5. Norwegian Cruise Line Holdings Ltd. (2026). *Form 10-Q for the quarterly period ended September 30, 2026*. U.S. Securities and Exchange Commission. https://www.sec.gov/Archives/edgar/data/1513761/000110465926120217/nclh-20260930x10q.htm
+6. Carnival Corporation & plc (2026). *Form 10-Q for the quarterly period ended August 31, 2026*. U.S. Securities and Exchange Commission. https://www.sec.gov/Archives/edgar/data/815097/000081509726000107/ccl-20260831.htm
+7. Royal Caribbean Cruises Ltd. (2020). *Form 10-K for the fiscal year ended December 31, 2019*. U.S. Securities and Exchange Commission. https://www.sec.gov/Archives/edgar/data/884887/000088488720000009/rcl-20191231.htm
+
+A citation for each of the 102 filings is in [SEC_FILINGS.md](SEC_FILINGS.md#citations).
+
+**SEC data services**
+
+8. U.S. Securities and Exchange Commission. *EDGAR Application Programming Interfaces (submissions and XBRL company facts)*. https://www.sec.gov/search-filings/edgar-application-programming-interfaces
+9. U.S. Securities and Exchange Commission. *XBRL company facts*: [Royal Caribbean](https://data.sec.gov/api/xbrl/companyfacts/CIK0000884887.json), [Norwegian](https://data.sec.gov/api/xbrl/companyfacts/CIK0001513761.json), [Carnival](https://data.sec.gov/api/xbrl/companyfacts/CIK0000815097.json).
+
+**Economic data**
+
+10. U.S. Bureau of Labor Statistics. *Consumer Price Index for All Urban Consumers: Airline Fares in U.S. City Average, Seasonally Adjusted* (Series CUSR0000SETG01). https://data.bls.gov/timeseries/CUSR0000SETG01
+11. U.S. Bureau of Labor Statistics. *Labor Force Statistics from the Current Population Survey: Unemployment Rate, Seasonally Adjusted* (Series LNS14000000). https://data.bls.gov/timeseries/LNS14000000
+12. U.S. Bureau of Labor Statistics. *Public Data API*. https://www.bls.gov/developers/
+13. University of Michigan, Surveys of Consumers. *Index of Consumer Sentiment* (monthly). https://www.sca.isr.umich.edu/ (data file: https://www.sca.isr.umich.edu/files/tbmics.csv)
