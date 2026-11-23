@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page04v0200000000000",
+  "position": {
+    "x": 20,
+    "y": 82,
+    "z": 2000,
+    "height": 310,
+    "width": 760,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "sec_cruise_quarterly"
+                    }
+                  },
+                  "Property": "quarter_end"
+                }
+              },
+              "queryRef": "sec_cruise_quarterly.quarter_end",
+              "nativeQueryRef": "quarter_end",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "sec_cruise_quarterly"
+                    }
+                  },
+                  "Property": "company"
+                }
+              },
+              "queryRef": "sec_cruise_quarterly.company",
+              "nativeQueryRef": "company"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "sec_cruise_quarterly"
+                    }
+                  },
+                  "Property": "Occupancy % (normal ops)"
+                }
+              },
+              "queryRef": "sec_cruise_quarterly.Occupancy % (normal ops)",
+              "nativeQueryRef": "Occupancy % (normal ops)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Reported occupancy (load factor, %) by quarter'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

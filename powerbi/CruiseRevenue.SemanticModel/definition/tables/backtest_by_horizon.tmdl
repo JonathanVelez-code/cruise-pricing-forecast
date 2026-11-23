@@ -1,0 +1,74 @@
+table backtest_by_horizon
+	lineageTag: 94611ba7-653a-46b9-a6e1-03dc9dece574
+
+	measure 'Model MAPE (%)' = AVERAGE(backtest_by_horizon[model_mape])
+		formatString: 0.0
+		lineageTag: da903a5f-47bd-4c81-9d20-a2472ade946c
+
+	measure 'Baseline MAPE (%)' = AVERAGE(backtest_by_horizon[baseline_mape])
+		formatString: 0.0
+		lineageTag: e52f0756-9398-490d-9e17-6a43284726ec
+
+	column horizon
+		dataType: int64
+		formatString: 0
+		lineageTag: e12fbed5-ada0-489c-917e-92ff4921599e
+		summarizeBy: none
+		sourceColumn: horizon
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_mape
+		dataType: double
+		lineageTag: 199931f4-8d5b-4e78-8700-30556f723987
+		summarizeBy: sum
+		sourceColumn: model_mape
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_mape
+		dataType: double
+		lineageTag: 533b8ca8-a787-4e8e-82e7-3a280889e3e4
+		summarizeBy: sum
+		sourceColumn: baseline_mape
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_wape
+		dataType: double
+		lineageTag: cc276764-d6bb-4950-bc1b-e0929b57f8df
+		summarizeBy: sum
+		sourceColumn: model_wape
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_wape
+		dataType: double
+		lineageTag: fecb57e8-e31a-44f5-85ab-5058b1756f8e
+		summarizeBy: sum
+		sourceColumn: baseline_wape
+
+		annotation SummarizationSetBy = Automatic
+
+	column horizon_label
+		dataType: string
+		lineageTag: 308deb09-a062-4576-87f2-8f609ddb3d33
+		summarizeBy: none
+		sourceColumn: horizon_label
+		sortByColumn: horizon
+
+		annotation SummarizationSetBy = Automatic
+
+	partition backtest_by_horizon = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\backtest_by_horizon.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"horizon", Int64.Type}, {"model_mape", type number}, {"baseline_mape", type number}, {"model_wape", type number}, {"baseline_wape", type number}}, "en-US"),
+				    #"Added Label" = Table.AddColumn(#"Changed Type", "horizon_label", each Text.From([horizon]) & " days", type text)
+				in
+				    #"Added Label"
+
+	annotation PBI_ResultType = Table
+

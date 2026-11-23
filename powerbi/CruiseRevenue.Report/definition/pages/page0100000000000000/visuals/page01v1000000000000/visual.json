@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page01v1000000000000",
+  "position": {
+    "x": 20,
+    "y": 455,
+    "z": 10000,
+    "height": 255,
+    "width": 620,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "sql_customer_acquisition"
+                    }
+                  },
+                  "Property": "booking_year_label"
+                }
+              },
+              "queryRef": "sql_customer_acquisition.booking_year_label",
+              "nativeQueryRef": "booking_year_label",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "sql_customer_acquisition"
+                    }
+                  },
+                  "Property": "channel"
+                }
+              },
+              "queryRef": "sql_customer_acquisition.channel",
+              "nativeQueryRef": "channel"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "sql_customer_acquisition"
+                    }
+                  },
+                  "Property": "New Guests"
+                }
+              },
+              "queryRef": "sql_customer_acquisition.New Guests",
+              "nativeQueryRef": "New Guests"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'New guests by booking year and channel'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

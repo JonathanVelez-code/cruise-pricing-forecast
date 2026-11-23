@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CruiseRevenue"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b2a751b1-56ff-42ab-8904-5563687cf6c6"
+  }
+}

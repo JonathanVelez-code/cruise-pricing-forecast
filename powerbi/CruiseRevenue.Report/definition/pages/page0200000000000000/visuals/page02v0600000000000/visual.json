@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page02v0600000000000",
+  "position": {
+    "x": 20,
+    "y": 190,
+    "z": 6000,
+    "height": 520,
+    "width": 380,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "recommendation"
+                }
+              },
+              "queryRef": "forecast_open_sailings.recommendation",
+              "nativeQueryRef": "recommendation",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "Open Sailing-Categories"
+                }
+              },
+              "queryRef": "forecast_open_sailings.Open Sailing-Categories",
+              "nativeQueryRef": "Open Sailing-Categories"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "forecast_open_sailings"
+                  }
+                },
+                "Property": "Open Sailing-Categories"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Recommended action'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

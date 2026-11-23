@@ -1,4 +1,4 @@
-"""Export a star schema of CSVs for the Power BI dashboard (see powerbi/BUILD_GUIDE.md)."""
+"""Export a star schema of CSVs for the Power BI dashboard (powerbi/CruiseRevenue.pbip)."""
 import shutil
 
 import numpy as np
@@ -51,8 +51,10 @@ def run(tables: dict, as_of=config.AS_OF) -> None:
         out / "dim_date.csv", index=False, date_format="%Y-%m-%d")
     pace_curves(b, s, inv).to_csv(out / "pace_curves.csv", index=False)
 
-    for f in ("forecast_open_sailings.csv", "feature_importance.csv", "experiment_sailings.csv"):
-        shutil.copy(config.OUTPUTS / f, out / f)
+    for f in ("forecast_open_sailings.csv", "feature_importance.csv", "experiment_sailings.csv",
+              "sec_cruise_quarterly.csv", "calibration_vs_sec.csv"):
+        if (config.OUTPUTS / f).exists():
+            shutil.copy(config.OUTPUTS / f, out / f)
     bt = pd.read_json(config.OUTPUTS / "forecast_backtest.json", typ="series")
     pd.DataFrame(bt["by_horizon"]).to_csv(out / "backtest_by_horizon.csv", index=False)
     pred = pd.read_csv(config.OUTPUTS / "backtest_predictions.csv", parse_dates=["sail_date"])

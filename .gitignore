@@ -13,3 +13,7 @@ logs/
 .env
 *.pem
 .aws/
+
+# Power BI project: local settings and the data cache (rebuilt on refresh)
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

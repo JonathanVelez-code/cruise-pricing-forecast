@@ -1,0 +1,106 @@
+table sql_customer_acquisition
+	lineageTag: e7700469-4c1b-4c57-9871-c269cfce88b2
+
+	measure 'New Guests' = SUM(sql_customer_acquisition[new_guests])
+		formatString: #,0
+		lineageTag: 5a95957c-46bb-4652-ae96-5287ab87dc6e
+
+	measure 'Acquisition Revenue' = SUM(sql_customer_acquisition[confirmed_revenue])
+		formatString: \$#,0
+		lineageTag: 72088ca7-fa09-4ba9-afde-fdd4e054bdfc
+
+	column booking_year
+		dataType: int64
+		formatString: 0
+		lineageTag: a7b39e62-e069-4d3a-9488-9c17bea6e435
+		summarizeBy: none
+		sourceColumn: booking_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 0e5d2555-8298-485c-8de6-2b0768f7108a
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_market
+		dataType: string
+		lineageTag: f6440c78-8bca-496f-a682-5eec6b42287d
+		summarizeBy: none
+		sourceColumn: source_market
+
+		annotation SummarizationSetBy = Automatic
+
+	column bookings
+		dataType: int64
+		formatString: 0
+		lineageTag: b1441e29-eb64-4db6-9c98-6b704ef3088a
+		summarizeBy: sum
+		sourceColumn: bookings
+
+		annotation SummarizationSetBy = Automatic
+
+	column new_guests
+		dataType: double
+		lineageTag: 6fa46766-833d-4ef0-8f66-492f2cbcec98
+		summarizeBy: sum
+		sourceColumn: new_guests
+
+		annotation SummarizationSetBy = Automatic
+
+	column repeat_bookings
+		dataType: double
+		lineageTag: ddc23c01-63a2-446f-b79c-a7db8f95ffaf
+		summarizeBy: sum
+		sourceColumn: repeat_bookings
+
+		annotation SummarizationSetBy = Automatic
+
+	column confirmed_revenue
+		dataType: double
+		lineageTag: 0c51335e-fcc7-4589-be2a-e63f50a88c07
+		summarizeBy: sum
+		sourceColumn: confirmed_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_price
+		dataType: double
+		lineageTag: 0025c1d5-a293-482b-ae30-e2924be69705
+		summarizeBy: sum
+		sourceColumn: avg_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column cancel_rate_pct
+		dataType: double
+		lineageTag: 4de84b48-111e-4354-8f6c-fe6e68c12cea
+		summarizeBy: sum
+		sourceColumn: cancel_rate_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column booking_year_label
+		dataType: string
+		lineageTag: 2ae3034f-eebe-497a-b57e-a8ff284ca85e
+		summarizeBy: none
+		sourceColumn: booking_year_label
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sql_customer_acquisition = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\sql_customer_acquisition.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"booking_year", Int64.Type}, {"channel", type text}, {"source_market", type text}, {"bookings", Int64.Type}, {"new_guests", type number}, {"repeat_bookings", type number}, {"confirmed_revenue", type number}, {"avg_price", type number}, {"cancel_rate_pct", type number}}, "en-US"),
+				    #"Added Year" = Table.AddColumn(#"Changed Type", "booking_year_label", each Text.From([booking_year]), type text)
+				in
+				    #"Added Year"
+
+	annotation PBI_ResultType = Table
+

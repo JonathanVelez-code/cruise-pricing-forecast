@@ -1,0 +1,45 @@
+relationship 7237dc1b-0641-4e0b-9741-b3fa820ba6e4
+	fromColumn: fact_bookings.sailing_id
+	toColumn: dim_sailing.sailing_id
+
+relationship 504f1550-f9ae-410d-93ce-80351f41c7b7
+	fromColumn: fact_cabin_inventory.sailing_id
+	toColumn: dim_sailing.sailing_id
+
+relationship 98e84379-6295-4cf5-8e67-de31e9ca5ca2
+	fromColumn: forecast_open_sailings.sailing_id
+	toColumn: dim_sailing.sailing_id
+
+relationship dda4656b-8abe-46e6-8294-9b74b300abf0
+	fromColumn: experiment_sailings.sailing_id
+	toColumn: dim_sailing.sailing_id
+
+relationship ba6b39c5-f707-4061-af13-3f1b1c8a61ea
+	fromColumn: dim_sailing.sail_date
+	toColumn: dim_date.date
+
+relationship a5e68729-1709-406b-a430-2c34a7f829f4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_bookings.booking_date
+	toColumn: LocalDateTable_cb8b85ed-9c56-41c2-a815-ee7d78fcda40.Date
+
+relationship 1bae0e9b-e3f3-4120-ab54-2074c785621a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_bookings.cancel_date
+	toColumn: LocalDateTable_5bcab464-7d8f-4b14-b73a-0534c21d6ad6.Date
+
+relationship 9a80a16c-4023-4983-8f66-606fbe7ff803
+	joinOnDateBehavior: datePartOnly
+	fromColumn: forecast_open_sailings.sail_date
+	toColumn: LocalDateTable_89b363b9-72d4-4b05-a5e6-762e93bede42.Date
+
+relationship cda958d9-bd99-48b2-a70e-3af0b8331365
+	joinOnDateBehavior: datePartOnly
+	fromColumn: experiment_sailings.sail_date
+	toColumn: LocalDateTable_73470a3c-f63c-48f8-b3c8-33369d2efa27.Date
+
+relationship d86400aa-f647-415d-bf7e-4c62727aee40
+	joinOnDateBehavior: datePartOnly
+	fromColumn: sec_cruise_quarterly.quarter_end
+	toColumn: LocalDateTable_d0d9b00a-c20e-4e65-ac15-894cec572900.Date
+

@@ -1,0 +1,72 @@
+table calibration_vs_sec
+	lineageTag: d9e6d464-10c3-430e-bbdd-888df5973812
+
+	measure 'This project (synthetic)' = SUM(calibration_vs_sec[synthetic])
+		formatString: 0.0
+		lineageTag: 2129241d-5332-4e4f-b5c1-6eb226ebbac7
+
+	measure 'Royal Caribbean (SEC)' = SUM(calibration_vs_sec[Royal Caribbean])
+		formatString: 0.0
+		lineageTag: 3efd4f26-a79e-4571-a26a-d6b0ba5d4eda
+
+	measure 'Norwegian (SEC)' = SUM(calibration_vs_sec[Norwegian])
+		formatString: 0.0
+		lineageTag: 74bda6f1-dade-45d0-b7f7-5c232a1e23cb
+
+	measure 'Carnival (SEC)' = SUM(calibration_vs_sec[Carnival])
+		formatString: 0.0
+		lineageTag: a50ca4cf-13b6-40ca-b2cd-bd24a793b7fb
+
+	column quarter
+		dataType: string
+		lineageTag: 845bd051-1b2d-490c-85c8-702840363c45
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column synthetic
+		dataType: double
+		lineageTag: e351fae3-0f57-4cfe-a215-5e905091cde7
+		summarizeBy: sum
+		sourceColumn: synthetic
+
+		annotation SummarizationSetBy = Automatic
+
+	column Carnival
+		dataType: double
+		lineageTag: a601a7b9-468b-483e-ad04-bb02044ce00f
+		summarizeBy: sum
+		sourceColumn: Carnival
+
+		annotation SummarizationSetBy = Automatic
+
+	column Norwegian
+		dataType: double
+		lineageTag: b86d9a02-0bd7-4b9d-bf3d-810d7a505933
+		summarizeBy: sum
+		sourceColumn: Norwegian
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Royal Caribbean'
+		dataType: double
+		lineageTag: 93b7f4e7-6c34-4d9c-aef4-5f4f3806d406
+		summarizeBy: sum
+		sourceColumn: Royal Caribbean
+
+		annotation SummarizationSetBy = Automatic
+
+	partition calibration_vs_sec = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\calibration_vs_sec.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"quarter", type text}, {"synthetic", type number}, {"Carnival", type number}, {"Norwegian", type number}, {"Royal Caribbean", type number}}, "en-US"),
+				    #"Removed Year" = Table.SelectRows(#"Changed Type", each [quarter] <> "Year")
+				in
+				    #"Removed Year"
+
+	annotation PBI_ResultType = Table
+

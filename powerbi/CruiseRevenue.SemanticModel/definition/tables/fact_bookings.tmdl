@@ -1,0 +1,193 @@
+table fact_bookings
+	lineageTag: a9c2e98a-c256-4b7c-abe2-25a94b9ed887
+
+	measure 'Total Revenue' = CALCULATE(SUM(fact_bookings[price_paid]), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
+		formatString: \$#,0
+		lineageTag: a05b3c65-ec70-4edd-b400-e5d130913c96
+
+	measure 'Cabins Booked' = CALCULATE(COUNTROWS(fact_bookings), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
+		formatString: #,0
+		lineageTag: d0ed085d-8bcb-45d5-b2d8-a4f6a245383a
+
+	measure 'Cabins Available' = CALCULATE(SUM(fact_cabin_inventory[cabins_available]), dim_sailing[departed] = TRUE())
+		formatString: #,0
+		lineageTag: 6b1715ef-9a86-4d4b-8105-9916ae4b25c6
+
+	measure 'Occupancy %' = DIVIDE([Cabins Booked], [Cabins Available])
+		formatString: 0.0%
+		lineageTag: c29a319e-3d63-4f6c-860b-c37b8b95527c
+
+	measure 'Guest Nights' = CALCULATE(SUMX(fact_bookings, fact_bookings[guests] * RELATED(dim_sailing[nights])), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
+		formatString: #,0
+		lineageTag: 78b9db4e-93ba-4069-9260-c96966d4bed6
+
+	measure 'Capacity Nights' = CALCULATE(SUMX(fact_cabin_inventory, fact_cabin_inventory[cabins_available] * 2 * RELATED(dim_sailing[nights])), dim_sailing[departed] = TRUE())
+		formatString: #,0
+		lineageTag: 792573ea-b042-48cb-a764-1b89449be3d4
+
+	measure 'Load Factor' = DIVIDE([Guest Nights], [Capacity Nights])
+		formatString: 0.0%
+		lineageTag: 46ecba86-261a-4d75-9de4-6b8c0c76c91d
+
+	measure 'Cabin Nights Sold' = CALCULATE(SUMX(fact_bookings, RELATED(dim_sailing[nights])), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
+		formatString: #,0
+		lineageTag: 82c1537a-7be2-4bd3-a4d1-a1c3d9e249c1
+
+	measure 'Avg Price per Cabin-Night' = DIVIDE([Total Revenue], [Cabin Nights Sold])
+		formatString: \$#,0
+		lineageTag: 26afce94-23b2-47bd-a6ca-d1e12c6aea6a
+
+	measure 'Revenue per Available Cabin' = DIVIDE([Total Revenue], [Cabins Available])
+		formatString: \$#,0
+		lineageTag: 8126d824-3fda-468a-83ed-11237191498a
+
+	measure 'Cancellation Rate' = DIVIDE(CALCULATE(COUNTROWS(fact_bookings), fact_bookings[status] = "cancelled"), COUNTROWS(fact_bookings))
+		formatString: 0.0%
+		lineageTag: c6447876-01f1-41e2-961f-e1962767e6b7
+
+	column booking_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f09c8ba-2810-45ea-903a-f9115ec4b475
+		summarizeBy: sum
+		sourceColumn: booking_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column guest_id
+		dataType: int64
+		formatString: 0
+		lineageTag: fdcf9562-febd-4ff0-9c21-4d06b3502e3b
+		summarizeBy: sum
+		sourceColumn: guest_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sailing_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5601acd3-58ca-4d06-a7be-4e2574bd11be
+		summarizeBy: none
+		sourceColumn: sailing_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cabin_category
+		dataType: string
+		lineageTag: 60d73460-d8bf-4501-b80d-ba3478e3d95c
+		summarizeBy: none
+		sourceColumn: cabin_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column booking_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: ab9f8bcf-e450-468b-b5fe-74323e3329fb
+		summarizeBy: none
+		sourceColumn: booking_date
+
+		variation Variation
+			isDefault
+			relationship: a5e68729-1709-406b-a430-2c34a7f829f4
+			defaultHierarchy: LocalDateTable_cb8b85ed-9c56-41c2-a815-ee7d78fcda40.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column days_out
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ca9bc66-79ac-4193-a99d-7e8d1fe4dc50
+		summarizeBy: sum
+		sourceColumn: days_out
+
+		annotation SummarizationSetBy = Automatic
+
+	column guests
+		dataType: int64
+		formatString: 0
+		lineageTag: bed97892-0015-4f1f-85de-90b222d6a5ed
+		summarizeBy: sum
+		sourceColumn: guests
+
+		annotation SummarizationSetBy = Automatic
+
+	column price_paid
+		dataType: double
+		formatString: \$#,0
+		lineageTag: 3b3448ee-fd36-4a86-b083-1ef5f5d086e5
+		summarizeBy: sum
+		sourceColumn: price_paid
+
+		annotation SummarizationSetBy = Automatic
+
+	column price_imputed
+		dataType: boolean
+		lineageTag: de80a90c-909d-4f1a-8973-44b03a40aefa
+		summarizeBy: none
+		sourceColumn: price_imputed
+
+		annotation SummarizationSetBy = Automatic
+
+	column promo_code
+		dataType: string
+		lineageTag: 46165d11-ba92-4c18-9c48-4f5441f9cf53
+		summarizeBy: none
+		sourceColumn: promo_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: a98ba7f7-6b79-46a3-b758-3dce48f04b2f
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_market
+		dataType: string
+		lineageTag: 73a79060-87ef-4f14-b238-c2bf0bcd9c34
+		summarizeBy: none
+		sourceColumn: source_market
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: ceef2fe1-791e-4c9c-bc4c-432726220b9b
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column cancel_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 539296c1-afd6-405d-bc52-e2753636e426
+		summarizeBy: none
+		sourceColumn: cancel_date
+
+		variation Variation
+			isDefault
+			relationship: 1bae0e9b-e3f3-4120-ab54-2074c785621a
+			defaultHierarchy: LocalDateTable_5bcab464-7d8f-4b14-b73a-0534c21d6ad6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fact_bookings = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\fact_bookings.csv"),[Delimiter=",", Columns=14, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"booking_id", Int64.Type}, {"guest_id", Int64.Type}, {"sailing_id", Int64.Type}, {"cabin_category", type text}, {"booking_date", type date}, {"days_out", Int64.Type}, {"guests", Int64.Type}, {"price_paid", type number}, {"price_imputed", type logical}, {"promo_code", type text}, {"channel", type text}, {"source_market", type text}, {"status", type text}, {"cancel_date", type date}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

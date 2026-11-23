@@ -1,0 +1,111 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page03v0200000000000",
+  "position": {
+    "x": 20,
+    "y": 82,
+    "z": 2000,
+    "height": 400,
+    "width": 760,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backtest_by_horizon"
+                    }
+                  },
+                  "Property": "horizon_label"
+                }
+              },
+              "queryRef": "backtest_by_horizon.horizon_label",
+              "nativeQueryRef": "horizon_label",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backtest_by_horizon"
+                    }
+                  },
+                  "Property": "Model MAPE (%)"
+                }
+              },
+              "queryRef": "backtest_by_horizon.Model MAPE (%)",
+              "nativeQueryRef": "Model MAPE (%)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backtest_by_horizon"
+                    }
+                  },
+                  "Property": "Baseline MAPE (%)"
+                }
+              },
+              "queryRef": "backtest_by_horizon.Baseline MAPE (%)",
+              "nativeQueryRef": "Baseline MAPE (%)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "backtest_by_horizon"
+                  }
+                },
+                "Property": "horizon_label"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Forecast error (MAPE %): XGBoost vs. last-year-pace baseline'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

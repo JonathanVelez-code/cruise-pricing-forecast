@@ -1,7 +1,9 @@
 """Generate ~500K synthetic cruise bookings that behave like real cruise demand.
 
 What makes the data realistic:
-- Seasonality (peak in Mar, Jun-Jul, Dec; weak in Sep-Oct) and holiday weeks.
+- Calibrated to real cruise-line SEC filings (see src/calibration.py): ships sail nearly full all
+  year, with load factors around 107-112%, and seasonality shows mostly in PRICE and guest mix.
+- Seasonal demand (peak in Mar, Jun-Jul, Dec; weak in Sep-Oct) and holiday weeks.
 - Year-over-year growth in demand and price.
 - A booking curve: most cabins book in the last few months; longer cruises and
   suites book earlier.
@@ -18,10 +20,10 @@ from src import config
 
 SHIPS = pd.DataFrame([
     # ship_id, ship_name, brand, itinerary, trip_type, capacity by category, price premium
-    (1, "Ocean Star", "Royal Caribbean International", "Eastern Caribbean", "long", 220, 130, 310, 45, 1.10),
-    (2, "Island Dream", "Celebrity Cruises", "Western Caribbean", "long", 200, 120, 265, 35, 1.00),
-    (3, "Sea Breeze", "Royal Caribbean International", "Bahamas", "short", 175, 100, 165, 22, 0.95),
-    (4, "Coral Spirit", "Royal Caribbean International", "Bahamas & Cozumel", "short", 165, 90, 155, 22, 0.90),
+    (1, "Ocean Star", "Royal Caribbean International", "Eastern Caribbean", "long", 200, 118, 282, 41, 1.10),
+    (2, "Island Dream", "Celebrity Cruises", "Western Caribbean", "long", 182, 109, 241, 32, 1.00),
+    (3, "Sea Breeze", "Royal Caribbean International", "Bahamas", "short", 159, 91, 150, 20, 0.95),
+    (4, "Coral Spirit", "Royal Caribbean International", "Bahamas & Cozumel", "short", 150, 82, 141, 20, 0.90),
 ], columns=["ship_id", "ship_name", "brand", "itinerary", "trip_type",
             "cap_inside", "cap_oceanview", "cap_balcony", "cap_suite", "price_premium"])
 
@@ -91,9 +93,11 @@ def generate(as_of: pd.Timestamp = config.AS_OF, seed: int = config.SEED) -> dic
     inv = inv.sort_values(["sailing_id", "cabin_category"]).reset_index(drop=True)
 
     units = inv.merge(sailings, on="sailing_id").merge(SHIPS[["ship_id", "trip_type", "price_premium"]], on="ship_id")
-    fill = (0.62 + 0.45 * (units["demand_index"] - 0.75) / 0.5
-            + units["cabin_category"].map(CAT_FILL_ADJ) + rng.normal(0, 0.03, len(units)))
-    units["final_fill"] = fill.clip(0.40, 1.0)
+    # Calibrated to SEC filings: cruise lines sail nearly full all year (107-112% load factor) and
+    # flex PRICE with the season, so cabin fill only moves a few points between low and peak weeks.
+    fill = (0.955 + 0.12 * (units["demand_index"] - 1.0)
+            + 0.5 * units["cabin_category"].map(CAT_FILL_ADJ) + rng.normal(0, 0.015, len(units)))
+    units["final_fill"] = fill.clip(0.85, 1.0)
     n_confirmed = np.round(units["cabins_available"] * units["final_fill"]).astype(int)
     # Extra bookings that will cancel (cabins get resold), ~12% on top
     n_total = np.round(n_confirmed / 0.88).astype(int)
@@ -112,7 +116,12 @@ def generate(as_of: pd.Timestamp = config.AS_OF, seed: int = config.SEED) -> dic
     # Channel, market, guests
     b["channel"] = rng.choice(CHANNELS, n, p=CHANNEL_P)
     b["source_market"] = rng.choice(MARKETS, n, p=MARKET_P)
-    b["guests"] = rng.choice([1, 2, 3, 4], n, p=[0.05, 0.70, 0.15, 0.10])
+    # More families (3rd/4th guests) in summer and holiday weeks, which is why real load factors peak in Q3
+    sm = b["sail_date"].dt.month
+    family_season = (sm.between(6, 8) | (holiday_boost(b["sail_date"]) > 1)).to_numpy()
+    g_family = rng.choice([1, 2, 3, 4], n, p=[0.04, 0.64, 0.19, 0.13])
+    g_normal = rng.choice([1, 2, 3, 4], n, p=[0.06, 0.77, 0.11, 0.06])
+    b["guests"] = np.where(family_season, g_family, g_normal)
 
     # Promotions
     bm, bd = b["booking_date"].dt.month, b["booking_date"].dt.day

@@ -3,62 +3,62 @@
   "test_sailings": "2026-05-20 to 2026-11-19",
   "train_rows": 16464,
   "test_rows": 4424,
-  "model_mape": 3.9433653147030316,
-  "baseline_mape": 10.36891353897279,
-  "model_wape": 3.215891852964492,
-  "baseline_wape": 8.466855545662053,
-  "model_mae_cabins": 3.6037324811811904,
-  "baseline_mae_cabins": 9.487969042007563,
+  "model_mape": 3.3477127816890953,
+  "baseline_mape": 7.960704440955063,
+  "model_wape": 2.445544813672986,
+  "baseline_wape": 6.726065075934802,
+  "model_mae_cabins": 2.7729846904657203,
+  "baseline_mae_cabins": 7.62663410556392,
   "by_horizon": [
     {
       "horizon": 7,
-      "model_mape": 2.137536192033409,
-      "baseline_mape": 2.0547158099385405,
-      "model_wape": 1.7705147915472774,
-      "baseline_wape": 1.7073019743099562
+      "model_mape": 1.9234051145514415,
+      "baseline_mape": 2.0370317201211883,
+      "model_wape": 1.3908755940292552,
+      "baseline_wape": 1.629373507770303
     },
     {
       "horizon": 14,
-      "model_mape": 2.830473954719417,
-      "baseline_mape": 3.598413502845857,
-      "model_wape": 2.123176807560872,
-      "baseline_wape": 2.67646023176557
+      "model_mape": 2.4875998650093942,
+      "baseline_mape": 3.0673347078287847,
+      "model_wape": 1.8704081881020012,
+      "baseline_wape": 2.395844440776198
     },
     {
       "horizon": 30,
-      "model_mape": 3.6128441306878645,
-      "baseline_mape": 5.9901573596364885,
-      "model_wape": 2.80960940487561,
-      "baseline_wape": 4.6947027536041634
+      "model_mape": 3.3745422293226106,
+      "baseline_mape": 4.773586307020601,
+      "model_wape": 2.4628812095621275,
+      "baseline_wape": 3.740453952977094
     },
     {
       "horizon": 60,
-      "model_mape": 4.390104952615519,
-      "baseline_mape": 9.737916254204466,
-      "model_wape": 3.6228041907273294,
-      "baseline_wape": 7.828731912492348
+      "model_mape": 3.7906769527206694,
+      "baseline_mape": 7.187642639235875,
+      "model_wape": 2.7783462233615395,
+      "baseline_wape": 5.932310578580031
     },
     {
       "horizon": 90,
-      "model_mape": 4.6951924616721294,
-      "baseline_mape": 13.219489108366341,
-      "model_wape": 3.8995193522307257,
-      "baseline_wape": 10.451520313536241
+      "model_mape": 3.9132221993765377,
+      "baseline_mape": 9.50266793676248,
+      "model_wape": 2.8562241229752545,
+      "baseline_wape": 7.642737205934863
     },
     {
       "horizon": 120,
-      "model_mape": 4.767848326061508,
-      "baseline_mape": 15.868217928748368,
-      "model_wape": 3.9957685273778507,
-      "baseline_wape": 13.000515738868765
+      "model_mape": 3.9456519611783434,
+      "baseline_mape": 11.540398123274663,
+      "model_wape": 2.891749085378182,
+      "baseline_wape": 9.669289403510163
     },
     {
       "horizon": 180,
-      "model_mape": 5.169557185131375,
-      "baseline_mape": 22.113484809069462,
-      "model_wape": 4.289849896431777,
-      "baseline_wape": 18.908755895057325
+      "model_mape": 3.9988911496646677,
+      "baseline_mape": 17.616269652441847,
+      "model_wape": 2.868329272302541,
+      "baseline_wape": 16.072446441994963
     }
   ],
-  "mape_improvement_pct": 61.96934905589263
+  "mape_improvement_pct": 57.947028350075726
 }

@@ -1,0 +1,190 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page02v0700000000000",
+  "position": {
+    "x": 410,
+    "y": 190,
+    "z": 7000,
+    "height": 520,
+    "width": 850,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "sail_date"
+                }
+              },
+              "queryRef": "forecast_open_sailings.sail_date",
+              "nativeQueryRef": "sail_date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "ship_name"
+                }
+              },
+              "queryRef": "forecast_open_sailings.ship_name",
+              "nativeQueryRef": "ship_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "cabin_category"
+                }
+              },
+              "queryRef": "forecast_open_sailings.cabin_category",
+              "nativeQueryRef": "cabin_category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "days_to_sailing"
+                }
+              },
+              "queryRef": "forecast_open_sailings.days_to_sailing",
+              "nativeQueryRef": "days_to_sailing"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "otb"
+                }
+              },
+              "queryRef": "forecast_open_sailings.otb",
+              "nativeQueryRef": "otb"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "forecast_final"
+                }
+              },
+              "queryRef": "forecast_open_sailings.forecast_final",
+              "nativeQueryRef": "forecast_final"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "cabins_available"
+                }
+              },
+              "queryRef": "forecast_open_sailings.cabins_available",
+              "nativeQueryRef": "cabins_available"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "forecast_occupancy"
+                }
+              },
+              "queryRef": "forecast_open_sailings.forecast_occupancy",
+              "nativeQueryRef": "forecast_occupancy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "forecast_open_sailings"
+                    }
+                  },
+                  "Property": "recommendation"
+                }
+              },
+              "queryRef": "forecast_open_sailings.recommendation",
+              "nativeQueryRef": "recommendation"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "forecast_open_sailings"
+                  }
+                },
+                "Property": "sail_date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Open sailings: booked now vs. forecast'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

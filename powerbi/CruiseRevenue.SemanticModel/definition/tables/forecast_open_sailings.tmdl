@@ -1,0 +1,184 @@
+table forecast_open_sailings
+	lineageTag: eaeca31d-9513-4b8c-87d8-3a71dc11bfde
+
+	measure 'Open Sailing-Categories' = COUNTROWS(forecast_open_sailings)
+		formatString: #,0
+		lineageTag: 83772c9f-39f9-4aa0-a33a-c3a353deb61c
+
+	measure 'Booked Now' = DIVIDE(SUM(forecast_open_sailings[otb]), SUM(forecast_open_sailings[cabins_available]))
+		formatString: 0.0%
+		lineageTag: fe796a10-b1b7-4b63-9df1-ac68c25c439b
+
+	measure 'Forecast Occupancy' = DIVIDE(SUM(forecast_open_sailings[forecast_final]), SUM(forecast_open_sailings[cabins_available]))
+		formatString: 0.0%
+		lineageTag: 94f12e70-55af-45e4-a580-5110a97fcdab
+
+	measure 'Raise Price Count' = CALCULATE(COUNTROWS(forecast_open_sailings), forecast_open_sailings[recommendation] = "Raise price")
+		formatString: #,0
+		lineageTag: ee378da5-f845-413b-8a67-11d8b87d41ef
+
+	column sailing_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 56b039a5-1f90-4e19-8e3e-aa01a746472a
+		summarizeBy: none
+		sourceColumn: sailing_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column ship_name
+		dataType: string
+		lineageTag: 2a02a518-50dd-450e-a851-6838bb68d89d
+		summarizeBy: none
+		sourceColumn: ship_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column sail_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 112902c5-2735-4ccb-b985-ea7f69c9abce
+		summarizeBy: none
+		sourceColumn: sail_date
+
+		variation Variation
+			isDefault
+			relationship: 9a80a16c-4023-4983-8f66-606fbe7ff803
+			defaultHierarchy: LocalDateTable_89b363b9-72d4-4b05-a5e6-762e93bede42.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column nights
+		dataType: int64
+		formatString: 0
+		lineageTag: b4bda37d-468c-49ee-8235-5cc66bc456c3
+		summarizeBy: sum
+		sourceColumn: nights
+
+		annotation SummarizationSetBy = Automatic
+
+	column cabin_category
+		dataType: string
+		lineageTag: 06350eb1-d783-4e1b-a9d0-2cb7113edf1b
+		summarizeBy: none
+		sourceColumn: cabin_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_to_sailing
+		dataType: int64
+		formatString: 0
+		lineageTag: dcf67afb-323d-4e27-a826-552f0ebb3cfd
+		summarizeBy: sum
+		sourceColumn: days_to_sailing
+
+		annotation SummarizationSetBy = Automatic
+
+	column cabins_available
+		dataType: int64
+		formatString: 0
+		lineageTag: fae16a58-c648-4015-aed1-59a7b5482908
+		summarizeBy: sum
+		sourceColumn: cabins_available
+
+		annotation SummarizationSetBy = Automatic
+
+	column otb
+		dataType: double
+		lineageTag: 6eae26f3-ee62-4f4c-b360-604ce8d67360
+		summarizeBy: sum
+		sourceColumn: otb
+
+		annotation SummarizationSetBy = Automatic
+
+	column otb_pct
+		dataType: double
+		formatString: 0.0%
+		lineageTag: c9dbdc79-50b6-4bb4-8017-b827dc261157
+		summarizeBy: sum
+		sourceColumn: otb_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column ly_otb
+		dataType: double
+		lineageTag: f02503a8-2d38-430b-8dc4-c9c0a8ca96ab
+		summarizeBy: sum
+		sourceColumn: ly_otb
+
+		annotation SummarizationSetBy = Automatic
+
+	column pace_vs_ly
+		dataType: double
+		formatString: 0.00
+		lineageTag: 546634e7-4f00-4838-a659-cdb4a1b0096e
+		summarizeBy: sum
+		sourceColumn: pace_vs_ly
+
+		annotation SummarizationSetBy = Automatic
+
+	column ly_final
+		dataType: int64
+		formatString: 0
+		lineageTag: 281375a7-1d1d-48a8-9853-0b952e4cad2f
+		summarizeBy: sum
+		sourceColumn: ly_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseline_final
+		dataType: double
+		lineageTag: b64a3545-3228-4025-8b8a-60d827d83200
+		summarizeBy: sum
+		sourceColumn: baseline_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_final
+		dataType: double
+		lineageTag: 53ae04e9-e244-4766-a754-d812621229f9
+		summarizeBy: sum
+		sourceColumn: forecast_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column forecast_occupancy
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 2babb708-0240-4ba6-9012-e1dbdcc54908
+		summarizeBy: sum
+		sourceColumn: forecast_occupancy
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_price_otb
+		dataType: double
+		formatString: \$#,0
+		lineageTag: 39df7a9e-0ff4-467d-89a2-36595beb444a
+		summarizeBy: sum
+		sourceColumn: avg_price_otb
+
+		annotation SummarizationSetBy = Automatic
+
+	column recommendation
+		dataType: string
+		lineageTag: 56c920be-09cf-4151-92fd-f8c8e2c84e62
+		summarizeBy: none
+		sourceColumn: recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition forecast_open_sailings = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\forecast_open_sailings.csv"),[Delimiter=",", Columns=17, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"sailing_id", Int64.Type}, {"ship_name", type text}, {"sail_date", type date}, {"nights", Int64.Type}, {"cabin_category", type text}, {"days_to_sailing", Int64.Type}, {"cabins_available", Int64.Type}, {"otb", type number}, {"otb_pct", type number}, {"ly_otb", type number}, {"pace_vs_ly", type number}, {"ly_final", Int64.Type}, {"baseline_final", type number}, {"forecast_final", type number}, {"forecast_occupancy", type number}, {"avg_price_otb", type number}, {"recommendation", type text}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

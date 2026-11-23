@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page05v0300000000000",
+  "position": {
+    "x": 650,
+    "y": 82,
+    "z": 3000,
+    "height": 100,
+    "width": 300,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "experiment_sailings"
+                    }
+                  },
+                  "Property": "Test Sailings"
+                }
+              },
+              "queryRef": "experiment_sailings.Test Sailings",
+              "nativeQueryRef": "Test Sailings"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

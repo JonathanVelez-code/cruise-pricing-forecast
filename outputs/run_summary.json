@@ -1,14 +1,14 @@
 {
   "as_of": "2026-11-20",
-  "runtime_seconds": 14.9,
-  "clean_bookings": 511119,
-  "forecast_model_mape": 3.94,
-  "forecast_baseline_mape": 10.37,
+  "runtime_seconds": 16.4,
+  "clean_bookings": 509320,
+  "forecast_model_mape": 3.35,
+  "forecast_baseline_mape": 7.96,
   "open_sailing_recommendations": {
-    "Hold price": 288,
-    "Raise price": 180,
-    "Promote / discount": 128,
-    "Too close to sailing": 24
+    "Hold price": 336,
+    "Raise price": 256,
+    "Too close to sailing": 24,
+    "Promote / discount": 4
   },
   "experiment_decision": "Inconclusive: no significant lift. Don't roll out broadly. Next, test a larger price step only on categories forecast to sell out, where demand exceeds cabins."
 }

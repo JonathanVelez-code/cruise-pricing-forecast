@@ -1,0 +1,154 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page04v0300000000000",
+  "position": {
+    "x": 790,
+    "y": 82,
+    "z": 3000,
+    "height": 310,
+    "width": 470,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "calibration_vs_sec"
+                    }
+                  },
+                  "Property": "quarter"
+                }
+              },
+              "queryRef": "calibration_vs_sec.quarter",
+              "nativeQueryRef": "quarter",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "calibration_vs_sec"
+                    }
+                  },
+                  "Property": "This project (synthetic)"
+                }
+              },
+              "queryRef": "calibration_vs_sec.This project (synthetic)",
+              "nativeQueryRef": "This project (synthetic)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "calibration_vs_sec"
+                    }
+                  },
+                  "Property": "Royal Caribbean (SEC)"
+                }
+              },
+              "queryRef": "calibration_vs_sec.Royal Caribbean (SEC)",
+              "nativeQueryRef": "Royal Caribbean (SEC)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "calibration_vs_sec"
+                    }
+                  },
+                  "Property": "Norwegian (SEC)"
+                }
+              },
+              "queryRef": "calibration_vs_sec.Norwegian (SEC)",
+              "nativeQueryRef": "Norwegian (SEC)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "calibration_vs_sec"
+                    }
+                  },
+                  "Property": "Carnival (SEC)"
+                }
+              },
+              "queryRef": "calibration_vs_sec.Carnival (SEC)",
+              "nativeQueryRef": "Carnival (SEC)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "calibration_vs_sec"
+                  }
+                },
+                "Property": "quarter"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "start": {
+              "expr": {
+                "Literal": {
+                  "Value": "95D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Calibration: synthetic vs. real load factor by quarter'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

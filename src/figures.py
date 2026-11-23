@@ -58,20 +58,52 @@ def feature_importance():
     save(fig, "feature_importance.png")
 
 
-def occupancy_by_month(tables):
+def seasonality(tables):
+    """Ships stay nearly full all year; seasonality shows up in price (calibrated to SEC filings)."""
     b, s, inv = tables["bookings"], tables["sailings"], tables["cabin_inventory"]
     dep = s[s["sail_date"] <= config.AS_OF]
-    conf = b[b["status"] == "confirmed"].groupby("sailing_id").size()
+    conf = b[b["status"] == "confirmed"]
+    cabins = conf.groupby("sailing_id").size()
     cap = inv.groupby("sailing_id")["cabins_available"].sum()
-    occ = (conf / cap).reindex(dep["sailing_id"]).fillna(0)
-    m = pd.Series(occ.to_numpy(), index=dep["sail_date"].dt.month.to_numpy()).groupby(level=0).mean() * 100
-    fig, ax = plt.subplots(figsize=(7, 3.5))
-    ax.bar(m.index, m.values, color=[ORANGE if v < 80 else BLUE for v in m.values])
+    per_night = conf.merge(dep[["sailing_id", "nights"]], on="sailing_id")
+    per_night = (per_night["price_paid"] / per_night["nights"]).groupby(per_night["sailing_id"]).mean()
+    month = dep.set_index("sailing_id")["sail_date"].dt.month
+    occ = ((cabins / cap).reindex(dep["sailing_id"]).fillna(0) * 100).groupby(month).mean()
+    price = per_night.reindex(dep["sailing_id"]).groupby(month).mean()
+    fig, ax = plt.subplots(figsize=(7.5, 3.8))
+    ax.bar(occ.index, occ.values, color=BLUE, alpha=0.85, label="Cabins sold (%)")
+    ax.set_ylim(80, 100)
+    ax.set_ylabel("Cabins sold (%)")
+    ax2 = ax.twinx()
+    ax2.plot(price.index, price.values, color=ORANGE, marker="o", lw=2, label="Avg price per cabin-night")
+    ax2.set_ylabel("Avg price per cabin-night")
+    ax2.spines["top"].set_visible(False)
     ax.set_xticks(range(1, 13), ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"])
-    ax.set_ylim(50, 100)
-    ax.set_ylabel("Average occupancy (%)")
-    ax.set_title("Seasonality: occupancy by sailing month")
-    save(fig, "occupancy_by_month.png")
+    ax.set_title("Ships sail nearly full all year; price carries the seasonality")
+    h1, l1 = ax.get_legend_handles_labels(); h2, l2 = ax2.get_legend_handles_labels()
+    ax.legend(h1 + h2, l1 + l2, frameon=False, fontsize=8, loc="lower left")
+    save(fig, "seasonality_price_vs_occupancy.png")
+
+
+def calibration_chart():
+    path = config.OUTPUTS / "calibration_vs_sec.csv"
+    if not path.exists():
+        return
+    c = pd.read_csv(path, index_col=0).drop(index="Year", errors="ignore")
+    cols = [("synthetic", "This project (synthetic)", ORANGE), ("Royal Caribbean", "Royal Caribbean (SEC)", BLUE),
+            ("Norwegian", "Norwegian (SEC)", "#5b9bd5"), ("Carnival", "Carnival (SEC)", GRAY)]
+    x = np.arange(len(c))
+    w = 0.2
+    fig, ax = plt.subplots(figsize=(7.5, 3.8))
+    for i, (col, label, color) in enumerate(cols):
+        if col in c:
+            ax.bar(x + (i - 1.5) * w, c[col], w, color=color, label=label)
+    ax.set_xticks(x, c.index)
+    ax.set_ylim(95, 115)
+    ax.set_ylabel("Load factor (%)")
+    ax.set_title("Load factor by quarter: synthetic data vs. real SEC filings")
+    ax.legend(frameon=False, fontsize=8, ncol=2)
+    save(fig, "calibration_vs_sec.png")
 
 
 def pace_example(tables):
@@ -118,6 +150,7 @@ def run(tables):
     error_by_horizon()
     backtest_scatter()
     feature_importance()
-    occupancy_by_month(tables)
+    seasonality(tables)
+    calibration_chart()
     pace_example(tables)
     experiment_chart()

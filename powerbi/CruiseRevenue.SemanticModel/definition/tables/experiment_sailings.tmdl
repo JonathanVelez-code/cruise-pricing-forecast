@@ -1,0 +1,146 @@
+table experiment_sailings
+	lineageTag: 2aab1fc4-12b0-4739-b7e6-ce06e8d5d61a
+
+	measure 'Avg RevPAC' = AVERAGE(experiment_sailings[revpac])
+		formatString: \$#,0
+		lineageTag: efdaedd3-7ec3-4d29-8c11-3425f0510059
+
+	measure 'Avg RevPAC (CUPED)' = AVERAGE(experiment_sailings[revpac_cuped])
+		formatString: \$#,0
+		lineageTag: c71f544f-ca8b-4aa1-ae75-4da0bb86c2ed
+
+	measure 'Test Sailings' = COUNTROWS(experiment_sailings)
+		formatString: #,0
+		lineageTag: 737898ec-c5b2-4856-9b79-21fe550dce50
+
+	measure 'Avg Final Occupancy' = AVERAGE(experiment_sailings[final_occupancy])
+		formatString: 0.0%
+		lineageTag: c27f787a-e4fb-44ab-9f10-fad2cb572e44
+
+	column sailing_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cc709e1-e5a7-47ab-b238-229b7b6c7210
+		summarizeBy: none
+		sourceColumn: sailing_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column sail_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 02b3bfcd-c06b-4ff9-8a33-c0da59951fdd
+		summarizeBy: none
+		sourceColumn: sail_date
+
+		variation Variation
+			isDefault
+			relationship: cda958d9-bd99-48b2-a70e-3af0b8331365
+			defaultHierarchy: LocalDateTable_73470a3c-f63c-48f8-b3c8-33369d2efa27.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column arm
+		dataType: string
+		lineageTag: e41582c4-c214-4008-a7f4-1d7855b2d005
+		summarizeBy: none
+		sourceColumn: arm
+
+		annotation SummarizationSetBy = Automatic
+
+	column categories
+		dataType: int64
+		formatString: 0
+		lineageTag: d6b15077-d2b6-4bad-8bd4-b52d996e6c0d
+		summarizeBy: sum
+		sourceColumn: categories
+
+		annotation SummarizationSetBy = Automatic
+
+	column cabins_available
+		dataType: int64
+		formatString: 0
+		lineageTag: 68c22ee9-dd45-48a2-831c-8c03253347e3
+		summarizeBy: sum
+		sourceColumn: cabins_available
+
+		annotation SummarizationSetBy = Automatic
+
+	column otb
+		dataType: double
+		lineageTag: 0a1ec855-b53c-48b4-b195-d149773f1d18
+		summarizeBy: sum
+		sourceColumn: otb
+
+		annotation SummarizationSetBy = Automatic
+
+	column otb_revenue
+		dataType: double
+		lineageTag: 49899f1d-bbb2-4f60-a0ea-9c25469e0d35
+		summarizeBy: sum
+		sourceColumn: otb_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_cabins
+		dataType: double
+		lineageTag: da3f176a-7897-4a33-b5d5-4ddcf2d739f9
+		summarizeBy: sum
+		sourceColumn: final_cabins
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		lineageTag: 564799e2-4a3d-4afe-bfba-852ed546c27a
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column revpac
+		dataType: double
+		lineageTag: e4688ed5-ea48-497d-9059-60a3725f9f70
+		summarizeBy: sum
+		sourceColumn: revpac
+
+		annotation SummarizationSetBy = Automatic
+
+	column pre_revpac
+		dataType: double
+		lineageTag: 720f1625-ef8a-47c6-a50e-b75dbce89959
+		summarizeBy: sum
+		sourceColumn: pre_revpac
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_occupancy
+		dataType: double
+		lineageTag: a6453882-ea31-41ca-9fed-0e57dede908d
+		summarizeBy: sum
+		sourceColumn: final_occupancy
+
+		annotation SummarizationSetBy = Automatic
+
+	column revpac_cuped
+		dataType: double
+		lineageTag: 18eb86ce-6c19-42d2-b128-d8a8f7f09ab8
+		summarizeBy: sum
+		sourceColumn: revpac_cuped
+
+		annotation SummarizationSetBy = Automatic
+
+	partition experiment_sailings = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\experiment_sailings.csv"),[Delimiter=",", Columns=13, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"sailing_id", Int64.Type}, {"sail_date", type date}, {"arm", type text}, {"categories", Int64.Type}, {"cabins_available", Int64.Type}, {"otb", type number}, {"otb_revenue", type number}, {"final_cabins", type number}, {"revenue", type number}, {"revpac", type number}, {"pre_revpac", type number}, {"final_occupancy", type number}, {"revpac_cuped", type number}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

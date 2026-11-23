@@ -1,14 +1,14 @@
 {
-  "raw_rows": 512207,
-  "category_text_fixed": 2555,
+  "raw_rows": 510409,
+  "category_text_fixed": 2546,
   "unknown_category_dropped": 0,
-  "duplicates_dropped": 1018,
+  "duplicates_dropped": 1019,
   "unknown_sailing_dropped": 0,
   "booked_after_sailing_dropped": 40,
   "nonpositive_price_dropped": 30,
-  "missing_price_imputed": 511,
+  "missing_price_imputed": 509,
   "missing_price_unfillable_dropped": 0,
   "status_cancel_date_mismatch": 0,
-  "clean_rows": 511119,
-  "rows_removed": 1088
+  "clean_rows": 509320,
+  "rows_removed": 1089
 }

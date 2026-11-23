@@ -1,0 +1,35 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation PBI_QueryOrder = ["fact_bookings","fact_cabin_inventory","dim_sailing","dim_date","forecast_open_sailings","backtest_by_horizon","feature_importance","experiment_sailings","sec_cruise_quarterly","calibration_vs_sec","sql_customer_acquisition","DataFolder"]
+
+ref table fact_bookings
+ref table fact_cabin_inventory
+ref table dim_sailing
+ref table dim_date
+ref table forecast_open_sailings
+ref table backtest_by_horizon
+ref table feature_importance
+ref table experiment_sailings
+ref table sec_cruise_quarterly
+ref table calibration_vs_sec
+ref table sql_customer_acquisition
+ref table DateTableTemplate_ea54d7de-feaa-4011-9143-ae6dedaa16d2
+ref table LocalDateTable_cb8b85ed-9c56-41c2-a815-ee7d78fcda40
+ref table LocalDateTable_5bcab464-7d8f-4b14-b73a-0534c21d6ad6
+ref table LocalDateTable_89b363b9-72d4-4b05-a5e6-762e93bede42
+ref table LocalDateTable_73470a3c-f63c-48f8-b3c8-33369d2efa27
+ref table LocalDateTable_d0d9b00a-c20e-4e65-ac15-894cec572900
+
+ref cultureInfo en-US
+
