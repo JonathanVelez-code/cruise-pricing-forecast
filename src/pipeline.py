@@ -25,7 +25,7 @@ def main():
         os.environ["AS_OF"] = args.as_of
 
     # Import after AS_OF is set so config picks it up
-    from src import calibration, config, etl, experiment, export_powerbi, figures, forecast, generate_data, sql_reports
+    from src import calibration, config, etl, experiment, export_powerbi, figures, forecast, generate_data, real_forecast, sql_reports
 
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s",
                         handlers=[logging.FileHandler(config.LOGS / "pipeline.log"), logging.StreamHandler()])
@@ -48,6 +48,14 @@ def main():
     if cal is not None:
         log.info("Load factor vs SEC filings (year): synthetic %.1f%%, Royal Caribbean %.1f%%",
                  cal.loc["Year", "synthetic"], cal.loc["Year", "Royal Caribbean"])
+    try:
+        rf = real_forecast.run()
+        if rf:
+            m = rf["results"]["mape_royal_caribbean"]
+            log.info("Real-data forecast (Royal Caribbean revenue/PCD): model %.2f%% vs trend %.2f%% vs seasonal naive %.2f%%",
+                     m["model"], m["naive_plus_trend"], m["seasonal_naive"])
+    except Exception as ex:  # economic data sources unreachable and no saved copy
+        log.warning("Real-data forecast skipped: %s", ex)
     log.info("SQL reports (DuckDB on Parquet): %s", ", ".join(f"{k} ({len(v)} rows)" for k, v in q.items()))
 
     f = forecast.run(e["tables"], config.AS_OF)

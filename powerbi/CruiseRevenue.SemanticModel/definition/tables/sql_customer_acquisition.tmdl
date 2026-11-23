@@ -1,18 +1,18 @@
 table sql_customer_acquisition
-	lineageTag: e7700469-4c1b-4c57-9871-c269cfce88b2
+	lineageTag: fcbcf552-e498-4c61-928d-14fa07561220
 
 	measure 'New Guests' = SUM(sql_customer_acquisition[new_guests])
 		formatString: #,0
-		lineageTag: 5a95957c-46bb-4652-ae96-5287ab87dc6e
+		lineageTag: b86bb11b-2b97-4286-ab6e-71176512b915
 
 	measure 'Acquisition Revenue' = SUM(sql_customer_acquisition[confirmed_revenue])
 		formatString: \$#,0
-		lineageTag: 72088ca7-fa09-4ba9-afde-fdd4e054bdfc
+		lineageTag: 16a01458-15a5-4578-9aaa-92e03ff9d208
 
 	column booking_year
 		dataType: int64
 		formatString: 0
-		lineageTag: a7b39e62-e069-4d3a-9488-9c17bea6e435
+		lineageTag: 6597b56b-7155-4061-88de-e724fb529b9f
 		summarizeBy: none
 		sourceColumn: booking_year
 
@@ -20,7 +20,7 @@ table sql_customer_acquisition
 
 	column channel
 		dataType: string
-		lineageTag: 0e5d2555-8298-485c-8de6-2b0768f7108a
+		lineageTag: 052360d0-ee52-4804-a51d-7bb3c50b6510
 		summarizeBy: none
 		sourceColumn: channel
 
@@ -28,7 +28,7 @@ table sql_customer_acquisition
 
 	column source_market
 		dataType: string
-		lineageTag: f6440c78-8bca-496f-a682-5eec6b42287d
+		lineageTag: d2957ffe-b7c8-4af1-b113-38902c184ddb
 		summarizeBy: none
 		sourceColumn: source_market
 
@@ -37,7 +37,7 @@ table sql_customer_acquisition
 	column bookings
 		dataType: int64
 		formatString: 0
-		lineageTag: b1441e29-eb64-4db6-9c98-6b704ef3088a
+		lineageTag: c7e8c2e8-04f0-4b71-a8e6-cf5dd0cc31f3
 		summarizeBy: sum
 		sourceColumn: bookings
 
@@ -45,7 +45,7 @@ table sql_customer_acquisition
 
 	column new_guests
 		dataType: double
-		lineageTag: 6fa46766-833d-4ef0-8f66-492f2cbcec98
+		lineageTag: d0454a0c-161c-4357-88bc-5b34177c9c27
 		summarizeBy: sum
 		sourceColumn: new_guests
 
@@ -53,7 +53,7 @@ table sql_customer_acquisition
 
 	column repeat_bookings
 		dataType: double
-		lineageTag: ddc23c01-63a2-446f-b79c-a7db8f95ffaf
+		lineageTag: 4651db86-2b50-41a0-b8d2-14114a3fc00a
 		summarizeBy: sum
 		sourceColumn: repeat_bookings
 
@@ -61,7 +61,7 @@ table sql_customer_acquisition
 
 	column confirmed_revenue
 		dataType: double
-		lineageTag: 0c51335e-fcc7-4589-be2a-e63f50a88c07
+		lineageTag: 1f1108bc-aab7-48bd-8822-5dcb6ce82534
 		summarizeBy: sum
 		sourceColumn: confirmed_revenue
 
@@ -69,7 +69,7 @@ table sql_customer_acquisition
 
 	column avg_price
 		dataType: double
-		lineageTag: 0025c1d5-a293-482b-ae30-e2924be69705
+		lineageTag: b914cba7-7d88-4773-9405-d1c464f41665
 		summarizeBy: sum
 		sourceColumn: avg_price
 
@@ -77,7 +77,7 @@ table sql_customer_acquisition
 
 	column cancel_rate_pct
 		dataType: double
-		lineageTag: 4de84b48-111e-4354-8f6c-fe6e68c12cea
+		lineageTag: 1bf06781-81f0-41ca-a131-5215633bbe90
 		summarizeBy: sum
 		sourceColumn: cancel_rate_pct
 
@@ -85,7 +85,7 @@ table sql_customer_acquisition
 
 	column booking_year_label
 		dataType: string
-		lineageTag: 2ae3034f-eebe-497a-b57e-a8ff284ca85e
+		lineageTag: 02ea7421-8228-4dc5-8082-596f7e067a6c
 		summarizeBy: none
 		sourceColumn: booking_year_label
 

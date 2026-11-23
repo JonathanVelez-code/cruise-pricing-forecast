@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "page06v0200000000000",
+  "position": {
+    "x": 20,
+    "y": 82,
+    "z": 2000,
+    "height": 420,
+    "width": 620,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "experiment_sailings"
+                    }
+                  },
+                  "Property": "arm"
+                }
+              },
+              "queryRef": "experiment_sailings.arm",
+              "nativeQueryRef": "arm",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "experiment_sailings"
+                    }
+                  },
+                  "Property": "Avg RevPAC"
+                }
+              },
+              "queryRef": "experiment_sailings.Avg RevPAC",
+              "nativeQueryRef": "Avg RevPAC"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "experiment_sailings"
+                    }
+                  },
+                  "Property": "Avg RevPAC (CUPED)"
+                }
+              },
+              "queryRef": "experiment_sailings.Avg RevPAC (CUPED)",
+              "nativeQueryRef": "Avg RevPAC (CUPED)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Revenue per available cabin: raw vs. CUPED-adjusted'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

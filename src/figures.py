@@ -152,5 +152,33 @@ def run(tables):
     feature_importance()
     seasonality(tables)
     calibration_chart()
+    real_forecast_chart()
     pace_example(tables)
     experiment_chart()
+
+def real_forecast_chart():
+    bt_path = config.OUTPUTS / "real_forecast_backtest.csv"
+    res_path = config.OUTPUTS / "real_forecast_results.json"
+    if not bt_path.exists():
+        return
+    bt = pd.read_csv(bt_path)
+    res = json.loads(res_path.read_text())
+    r = bt[bt["company"] == "Royal Caribbean"]
+    x = list(range(len(r)))
+    fig, ax = plt.subplots(figsize=(8, 3.9))
+    ax.plot(x, r["actual"], color="black", marker="o", lw=2, label="Actual (SEC filings)")
+    ax.plot(x, r["model"], color=BLUE, marker="o", lw=1.5,
+            label=f"Model ({res['mape_royal_caribbean']['model']:.1f}% error)")
+    ax.plot(x, r["naive_plus_trend"], color=GRAY, ls="--", lw=1.2,
+            label=f"Last year x recent growth ({res['mape_royal_caribbean']['naive_plus_trend']:.1f}%)")
+    ax.plot(x, r["seasonal_naive"], color=GRAY, ls=":", lw=1.2,
+            label=f"Same quarter last year ({res['mape_royal_caribbean']['seasonal_naive']:.1f}%)")
+    nq = res["royal_caribbean_next_quarter"]
+    lo, hi = nq["range_80pct"]
+    ax.errorbar([len(r)], [nq["forecast_revenue_per_pcd"]], yerr=[[nq["forecast_revenue_per_pcd"] - lo], [hi - nq["forecast_revenue_per_pcd"]]],
+                fmt="D", color=ORANGE, capsize=5, label=f"{nq['quarter']} forecast (80% range)")
+    ax.set_xticks(x + [len(r)], list(r["quarter"]) + [nq["quarter"]], rotation=45, fontsize=8)
+    ax.set_ylabel("Revenue per passenger day ($)")
+    ax.set_title("Royal Caribbean: real revenue per passenger day, walk-forward forecast")
+    ax.legend(frameon=False, fontsize=7.5, loc="upper left")
+    save(fig, "real_forecast_royal_caribbean.png")

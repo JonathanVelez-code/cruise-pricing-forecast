@@ -52,7 +52,7 @@ def run(tables: dict, as_of=config.AS_OF) -> None:
     pace_curves(b, s, inv).to_csv(out / "pace_curves.csv", index=False)
 
     for f in ("forecast_open_sailings.csv", "feature_importance.csv", "experiment_sailings.csv",
-              "sec_cruise_quarterly.csv", "calibration_vs_sec.csv"):
+              "sec_cruise_quarterly.csv", "calibration_vs_sec.csv", "real_forecast_backtest.csv"):
         if (config.OUTPUTS / f).exists():
             shutil.copy(config.OUTPUTS / f, out / f)
     bt = pd.read_json(config.OUTPUTS / "forecast_backtest.json", typ="series")

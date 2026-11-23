@@ -1,5 +1,5 @@
 expression DataFolder = "C:\Users\jonat\Documents\cruise-pricing-forecast\outputs\powerbi" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
-	lineageTag: 585feb5a-9c4a-4074-a396-4515f756c82f
+	lineageTag: 79973d0d-07c2-4406-b4fe-4d264b57af01
 
 	annotation PBI_ResultType = Text
 

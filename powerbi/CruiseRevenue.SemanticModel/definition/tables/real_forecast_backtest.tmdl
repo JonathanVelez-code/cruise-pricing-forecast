@@ -1,0 +1,91 @@
+table real_forecast_backtest
+	lineageTag: b640cefb-0e0b-43f9-9f59-54c3eb6dd7d1
+
+	measure 'RCL Actual (SEC)' = CALCULATE(AVERAGE(real_forecast_backtest[actual]), real_forecast_backtest[company] = "Royal Caribbean")
+		formatString: \$#,0
+		lineageTag: 8a816ac8-bc4c-4d2c-8957-7b13a0e99118
+
+	measure 'RCL Model Forecast' = CALCULATE(AVERAGE(real_forecast_backtest[model]), real_forecast_backtest[company] = "Royal Caribbean")
+		formatString: \$#,0
+		lineageTag: ba8282c3-0ac5-4b73-a773-8f81bf628d50
+
+	measure 'RCL Trend Baseline' = CALCULATE(AVERAGE(real_forecast_backtest[naive_plus_trend]), real_forecast_backtest[company] = "Royal Caribbean")
+		formatString: \$#,0
+		lineageTag: 1717632b-e395-42c9-b672-6f27a16fc64c
+
+	measure 'RCL Same Quarter Last Year' = CALCULATE(AVERAGE(real_forecast_backtest[seasonal_naive]), real_forecast_backtest[company] = "Royal Caribbean")
+		formatString: \$#,0
+		lineageTag: 84245d20-65b0-49b2-9c3b-0ec290a6c2df
+
+	measure 'Model Error %' = AVERAGEX(real_forecast_backtest, ABS(real_forecast_backtest[model] - real_forecast_backtest[actual]) / real_forecast_backtest[actual])
+		formatString: 0.00%
+		lineageTag: b6823beb-e5f0-4dff-9bde-152d40c9463d
+
+	measure 'Trend Baseline Error %' = AVERAGEX(real_forecast_backtest, ABS(real_forecast_backtest[naive_plus_trend] - real_forecast_backtest[actual]) / real_forecast_backtest[actual])
+		formatString: 0.00%
+		lineageTag: 1efc31f5-c1b5-4f18-a981-07d0564d039f
+
+	measure 'Last-Year Baseline Error %' = AVERAGEX(real_forecast_backtest, ABS(real_forecast_backtest[seasonal_naive] - real_forecast_backtest[actual]) / real_forecast_backtest[actual])
+		formatString: 0.00%
+		lineageTag: 43d4d269-07a6-44f5-be3f-e4048f51352e
+
+	column company
+		dataType: string
+		lineageTag: 0dc2fa06-a96b-4d70-9447-b19196204ab1
+		summarizeBy: none
+		sourceColumn: company
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: string
+		lineageTag: 955051ae-02a4-47bb-b319-d93313d688bc
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual
+		dataType: double
+		lineageTag: 539d3144-7e97-4f8c-bb06-c336c5c5c16d
+		summarizeBy: sum
+		sourceColumn: actual
+
+		annotation SummarizationSetBy = Automatic
+
+	column seasonal_naive
+		dataType: double
+		lineageTag: e790889c-f162-4d4b-8355-9f8495a57d01
+		summarizeBy: sum
+		sourceColumn: seasonal_naive
+
+		annotation SummarizationSetBy = Automatic
+
+	column naive_plus_trend
+		dataType: double
+		lineageTag: dfe6412f-2650-438b-b233-d0b1cf76f06b
+		summarizeBy: sum
+		sourceColumn: naive_plus_trend
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: double
+		lineageTag: b131cfd7-56bf-4162-a526-e168d0a24be9
+		summarizeBy: sum
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	partition real_forecast_backtest = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "\real_forecast_backtest.csv"),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"company", type text}, {"quarter", type text}, {"actual", type number}, {"seasonal_naive", type number}, {"naive_plus_trend", type number}, {"model", type number}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

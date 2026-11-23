@@ -1,0 +1,93 @@
+{
+  "test_quarters": "2024Q2 to 2026Q3",
+  "test_rows_all_lines": 28,
+  "test_rows_royal_caribbean": 10,
+  "mape_all_lines": {
+    "seasonal_naive": 3.55,
+    "naive_plus_trend": 1.61,
+    "model": 1.53
+  },
+  "mape_royal_caribbean": {
+    "seasonal_naive": 2.91,
+    "naive_plus_trend": 1.56,
+    "model": 1.24
+  },
+  "royal_caribbean_next_quarter": {
+    "quarter": "2026Q4",
+    "forecast_revenue_per_pcd": 282.83,
+    "range_80pct": [
+      278.41,
+      287.25
+    ],
+    "same_quarter_last_year": 281.75,
+    "note": "Check against Royal Caribbean's next earnings release."
+  },
+  "model_coefficients_standardized": {
+    "trail_growth": -0.0141,
+    "consumer_sentiment": 0.0048,
+    "airfare_yoy": -0.003,
+    "sentiment_yoy": -0.002,
+    "unemployment": -0.0042,
+    "q2": 0.0039,
+    "q3": -0.0076,
+    "q4": 0.005,
+    "Carnival": 0.0059,
+    "Norwegian": -0.0089
+  },
+  "final_settings": {
+    "ridge_alpha": 3,
+    "trend_damping": 1.0
+  },
+  "settings_chosen_per_test_quarter": [
+    {
+      "quarter": "2024Q2",
+      "alpha": 30,
+      "damp": 0.5
+    },
+    {
+      "quarter": "2024Q3",
+      "alpha": 30,
+      "damp": 0.5
+    },
+    {
+      "quarter": "2024Q4",
+      "alpha": 100,
+      "damp": 0.5
+    },
+    {
+      "quarter": "2025Q1",
+      "alpha": 100,
+      "damp": 0.5
+    },
+    {
+      "quarter": "2025Q2",
+      "alpha": 100,
+      "damp": 0.5
+    },
+    {
+      "quarter": "2025Q3",
+      "alpha": 100,
+      "damp": 0.5
+    },
+    {
+      "quarter": "2025Q4",
+      "alpha": 100,
+      "damp": 1.0
+    },
+    {
+      "quarter": "2026Q1",
+      "alpha": 100,
+      "damp": 1.0
+    },
+    {
+      "quarter": "2026Q2",
+      "alpha": 100,
+      "damp": 1.0
+    },
+    {
+      "quarter": "2026Q3",
+      "alpha": 100,
+      "damp": 1.0
+    }
+  ]
+}

@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "442 sailings randomized by sailing (control vs. treatment). Demand response is simulated (assumed elasticity about −0.9).",
+                    "value": "Real quarterly data from SEC filings + BLS airfare prices, unemployment and U. of Michigan consumer sentiment. Walk-forward test, 2024Q2–2026Q3.",
                     "textStyle": {
                       "fontSize": "10pt"
                     }

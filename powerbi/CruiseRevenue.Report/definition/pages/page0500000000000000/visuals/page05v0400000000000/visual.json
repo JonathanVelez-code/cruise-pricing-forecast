@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "page05v0400000000000",
   "position": {
-    "x": 960,
+    "x": 533.33333333333326,
     "y": 82,
     "z": 4000,
-    "height": 100,
-    "width": 300,
+    "height": 95,
+    "width": 246.66666666666666,
     "tabOrder": 4000
   },
   "visual": {
@@ -20,14 +20,14 @@
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "experiment_sailings"
+                      "Entity": "real_forecast_backtest"
                     }
                   },
-                  "Property": "Avg Final Occupancy"
+                  "Property": "Last-Year Baseline Error %"
                 }
               },
-              "queryRef": "experiment_sailings.Avg Final Occupancy",
-              "nativeQueryRef": "Avg Final Occupancy"
+              "queryRef": "real_forecast_backtest.Last-Year Baseline Error %",
+              "nativeQueryRef": "Last-Year Baseline Error %"
             }
           ]
         }

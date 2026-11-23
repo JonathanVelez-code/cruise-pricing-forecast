@@ -1,26 +1,26 @@
 table forecast_open_sailings
-	lineageTag: eaeca31d-9513-4b8c-87d8-3a71dc11bfde
+	lineageTag: b5ac11bd-2174-4365-be67-617124b4f769
 
 	measure 'Open Sailing-Categories' = COUNTROWS(forecast_open_sailings)
 		formatString: #,0
-		lineageTag: 83772c9f-39f9-4aa0-a33a-c3a353deb61c
+		lineageTag: 8878fcc6-0182-4078-917e-314fc1293dff
 
 	measure 'Booked Now' = DIVIDE(SUM(forecast_open_sailings[otb]), SUM(forecast_open_sailings[cabins_available]))
 		formatString: 0.0%
-		lineageTag: fe796a10-b1b7-4b63-9df1-ac68c25c439b
+		lineageTag: 5c8ef930-d6bc-4634-ae84-d1659608224a
 
 	measure 'Forecast Occupancy' = DIVIDE(SUM(forecast_open_sailings[forecast_final]), SUM(forecast_open_sailings[cabins_available]))
 		formatString: 0.0%
-		lineageTag: 94f12e70-55af-45e4-a580-5110a97fcdab
+		lineageTag: f52c261a-1caa-4cda-a3c6-daafc97724d0
 
 	measure 'Raise Price Count' = CALCULATE(COUNTROWS(forecast_open_sailings), forecast_open_sailings[recommendation] = "Raise price")
 		formatString: #,0
-		lineageTag: ee378da5-f845-413b-8a67-11d8b87d41ef
+		lineageTag: fe7e35fb-ae69-43c1-afa0-58806f86a68b
 
 	column sailing_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 56b039a5-1f90-4e19-8e3e-aa01a746472a
+		lineageTag: 16f2b431-583d-4183-b5ba-a55637c85e37
 		summarizeBy: none
 		sourceColumn: sailing_id
 
@@ -28,7 +28,7 @@ table forecast_open_sailings
 
 	column ship_name
 		dataType: string
-		lineageTag: 2a02a518-50dd-450e-a851-6838bb68d89d
+		lineageTag: 3c85bced-54cc-4be2-9027-9ad4597a3c7c
 		summarizeBy: none
 		sourceColumn: ship_name
 
@@ -37,14 +37,14 @@ table forecast_open_sailings
 	column sail_date
 		dataType: dateTime
 		formatString: yyyy-mm-dd
-		lineageTag: 112902c5-2735-4ccb-b985-ea7f69c9abce
+		lineageTag: e3c62208-949e-483f-b6d4-a6cd4db12a90
 		summarizeBy: none
 		sourceColumn: sail_date
 
 		variation Variation
 			isDefault
-			relationship: 9a80a16c-4023-4983-8f66-606fbe7ff803
-			defaultHierarchy: LocalDateTable_89b363b9-72d4-4b05-a5e6-762e93bede42.'Date Hierarchy'
+			relationship: 1f69a044-41ac-4beb-9893-f51ee91bfb29
+			defaultHierarchy: LocalDateTable_806bd661-de80-47d6-932f-ae6298cb4fb4.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -53,7 +53,7 @@ table forecast_open_sailings
 	column nights
 		dataType: int64
 		formatString: 0
-		lineageTag: b4bda37d-468c-49ee-8235-5cc66bc456c3
+		lineageTag: df98e3f2-5f08-4941-a55b-5619339fff9a
 		summarizeBy: sum
 		sourceColumn: nights
 
@@ -61,7 +61,7 @@ table forecast_open_sailings
 
 	column cabin_category
 		dataType: string
-		lineageTag: 06350eb1-d783-4e1b-a9d0-2cb7113edf1b
+		lineageTag: 29105b67-2f95-41ae-a6de-1f15f27789df
 		summarizeBy: none
 		sourceColumn: cabin_category
 
@@ -70,7 +70,7 @@ table forecast_open_sailings
 	column days_to_sailing
 		dataType: int64
 		formatString: 0
-		lineageTag: dcf67afb-323d-4e27-a826-552f0ebb3cfd
+		lineageTag: 70ab1c1c-e53f-4c71-9032-d9bf7b37bb89
 		summarizeBy: sum
 		sourceColumn: days_to_sailing
 
@@ -79,7 +79,7 @@ table forecast_open_sailings
 	column cabins_available
 		dataType: int64
 		formatString: 0
-		lineageTag: fae16a58-c648-4015-aed1-59a7b5482908
+		lineageTag: 2dc1ca1c-f98c-48f2-8a60-6e1918d46523
 		summarizeBy: sum
 		sourceColumn: cabins_available
 
@@ -87,7 +87,7 @@ table forecast_open_sailings
 
 	column otb
 		dataType: double
-		lineageTag: 6eae26f3-ee62-4f4c-b360-604ce8d67360
+		lineageTag: bb7a7886-dd58-4ee4-95ee-82d65aba7c2b
 		summarizeBy: sum
 		sourceColumn: otb
 
@@ -96,7 +96,7 @@ table forecast_open_sailings
 	column otb_pct
 		dataType: double
 		formatString: 0.0%
-		lineageTag: c9dbdc79-50b6-4bb4-8017-b827dc261157
+		lineageTag: 90d6e971-82cf-4b28-bdfa-313e7de4cdb9
 		summarizeBy: sum
 		sourceColumn: otb_pct
 
@@ -104,7 +104,7 @@ table forecast_open_sailings
 
 	column ly_otb
 		dataType: double
-		lineageTag: f02503a8-2d38-430b-8dc4-c9c0a8ca96ab
+		lineageTag: fccce366-d709-4d58-9191-2534e1b0b020
 		summarizeBy: sum
 		sourceColumn: ly_otb
 
@@ -113,7 +113,7 @@ table forecast_open_sailings
 	column pace_vs_ly
 		dataType: double
 		formatString: 0.00
-		lineageTag: 546634e7-4f00-4838-a659-cdb4a1b0096e
+		lineageTag: dc05d664-f4c0-46da-bbe4-bb91a2d07f73
 		summarizeBy: sum
 		sourceColumn: pace_vs_ly
 
@@ -122,7 +122,7 @@ table forecast_open_sailings
 	column ly_final
 		dataType: int64
 		formatString: 0
-		lineageTag: 281375a7-1d1d-48a8-9853-0b952e4cad2f
+		lineageTag: e524ad11-479e-4429-98da-8cc3afd9111a
 		summarizeBy: sum
 		sourceColumn: ly_final
 
@@ -130,7 +130,7 @@ table forecast_open_sailings
 
 	column baseline_final
 		dataType: double
-		lineageTag: b64a3545-3228-4025-8b8a-60d827d83200
+		lineageTag: ed607f9e-a300-40da-a9ec-1a28a4e38549
 		summarizeBy: sum
 		sourceColumn: baseline_final
 
@@ -138,7 +138,7 @@ table forecast_open_sailings
 
 	column forecast_final
 		dataType: double
-		lineageTag: 53ae04e9-e244-4766-a754-d812621229f9
+		lineageTag: 38951acd-d702-4b4c-87ce-61e7b0b96fcf
 		summarizeBy: sum
 		sourceColumn: forecast_final
 
@@ -147,7 +147,7 @@ table forecast_open_sailings
 	column forecast_occupancy
 		dataType: double
 		formatString: 0.0%
-		lineageTag: 2babb708-0240-4ba6-9012-e1dbdcc54908
+		lineageTag: 270e4382-5aa1-4ef0-9380-477756c91da6
 		summarizeBy: sum
 		sourceColumn: forecast_occupancy
 
@@ -156,7 +156,7 @@ table forecast_open_sailings
 	column avg_price_otb
 		dataType: double
 		formatString: \$#,0
-		lineageTag: 39df7a9e-0ff4-467d-89a2-36595beb444a
+		lineageTag: b832d8fe-360c-4d12-be8d-6ea4821d1be1
 		summarizeBy: sum
 		sourceColumn: avg_price_otb
 
@@ -164,7 +164,7 @@ table forecast_open_sailings
 
 	column recommendation
 		dataType: string
-		lineageTag: 56c920be-09cf-4151-92fd-f8c8e2c84e62
+		lineageTag: 4dde1d54-1f6d-41c7-a10f-0e722487c214
 		summarizeBy: none
 		sourceColumn: recommendation
 

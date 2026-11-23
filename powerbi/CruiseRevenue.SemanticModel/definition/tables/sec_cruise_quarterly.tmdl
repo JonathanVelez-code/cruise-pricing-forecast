@@ -1,17 +1,17 @@
 table sec_cruise_quarterly
-	lineageTag: 3d468a53-9207-4358-964a-54cf79b814a4
+	lineageTag: daae755a-aab7-4ba8-b64f-8f891509367e
 
 	measure 'Occupancy % (normal ops)' = CALCULATE(AVERAGE(sec_cruise_quarterly[occupancy_pct]), sec_cruise_quarterly[covid_period] = FALSE())
 		formatString: 0.0
-		lineageTag: 27c33816-2925-4b69-81b5-82275cbfe85f
+		lineageTag: cff9ee81-79dd-497f-9930-c1b75ad0ad80
 
 	measure 'Revenue per Passenger Day' = CALCULATE(AVERAGE(sec_cruise_quarterly[revenue_per_pcd]), sec_cruise_quarterly[covid_period] = FALSE())
 		formatString: \$#,0
-		lineageTag: 848a4ab5-762f-406e-ae81-2eedb48d65b6
+		lineageTag: 03eb1174-eea9-4356-948d-e40614185777
 
 	column company
 		dataType: string
-		lineageTag: c36d1cc2-a6c5-4599-a8bc-770c3705eaf2
+		lineageTag: 8271db50-e221-4c0d-a826-ddcb004fb5b1
 		summarizeBy: none
 		sourceColumn: company
 
@@ -20,14 +20,14 @@ table sec_cruise_quarterly
 	column quarter_end
 		dataType: dateTime
 		formatString: yyyy-mm-dd
-		lineageTag: b132cbc2-d608-4fc0-a021-e7667ac08497
+		lineageTag: 83060033-1b23-4cde-9545-d21a34dfb1dd
 		summarizeBy: none
 		sourceColumn: quarter_end
 
 		variation Variation
 			isDefault
-			relationship: d86400aa-f647-415d-bf7e-4c62727aee40
-			defaultHierarchy: LocalDateTable_d0d9b00a-c20e-4e65-ac15-894cec572900.'Date Hierarchy'
+			relationship: b12c6129-0541-4460-b509-eab0464f9a66
+			defaultHierarchy: LocalDateTable_7d2581af-0e25-42da-9960-ef936cb56d63.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -35,7 +35,7 @@ table sec_cruise_quarterly
 
 	column source
 		dataType: string
-		lineageTag: b6c5287d-0082-4fb7-9b34-df3f5b8e8a98
+		lineageTag: 0a20e4f2-bea4-40c0-b34a-a88486f640ec
 		summarizeBy: none
 		sourceColumn: source
 
@@ -43,7 +43,7 @@ table sec_cruise_quarterly
 
 	column passengers
 		dataType: double
-		lineageTag: 2d464676-8346-4ec1-8fb2-4e37ecd7d46e
+		lineageTag: be5add1a-84eb-4f0a-a771-fb435685f204
 		summarizeBy: sum
 		sourceColumn: passengers
 
@@ -51,7 +51,7 @@ table sec_cruise_quarterly
 
 	column pcd
 		dataType: double
-		lineageTag: 5a9b3039-6900-40c4-b99d-81bed25fca8c
+		lineageTag: 7f72e25a-c169-4850-bdb9-f02726acef40
 		summarizeBy: sum
 		sourceColumn: pcd
 
@@ -59,7 +59,7 @@ table sec_cruise_quarterly
 
 	column capacity_days
 		dataType: double
-		lineageTag: bf18f01a-44ea-4634-855b-094dc1540cd7
+		lineageTag: a41ac59d-5a4e-4cad-92f8-538d9b74b910
 		summarizeBy: sum
 		sourceColumn: capacity_days
 
@@ -67,7 +67,7 @@ table sec_cruise_quarterly
 
 	column occupancy_pct
 		dataType: double
-		lineageTag: 1f321441-0359-4cb7-888f-b617dd0c6d5d
+		lineageTag: c36648e6-8e6a-42e2-bcd4-b77b3f96f400
 		summarizeBy: sum
 		sourceColumn: occupancy_pct
 
@@ -76,7 +76,7 @@ table sec_cruise_quarterly
 	column total_revenue
 		dataType: int64
 		formatString: 0
-		lineageTag: 4e1ab8fb-890a-4f18-a7cc-2cc7847d7503
+		lineageTag: b6b5b31d-40ad-466c-879c-354b1c5cc551
 		summarizeBy: sum
 		sourceColumn: total_revenue
 
@@ -84,7 +84,7 @@ table sec_cruise_quarterly
 
 	column revenue_per_pcd
 		dataType: double
-		lineageTag: 838b6ab6-b0e3-4b88-b697-534fba00284e
+		lineageTag: a60f2060-f969-4d8c-aa1e-e4e98c75303a
 		summarizeBy: sum
 		sourceColumn: revenue_per_pcd
 
@@ -92,7 +92,7 @@ table sec_cruise_quarterly
 
 	column calendar_quarter
 		dataType: string
-		lineageTag: 36ca54e0-e2a4-48f0-88d9-26dab2694724
+		lineageTag: bd71fa6f-9931-452b-bca6-ff2a20c6a120
 		summarizeBy: none
 		sourceColumn: calendar_quarter
 
@@ -101,7 +101,7 @@ table sec_cruise_quarterly
 	column year
 		dataType: int64
 		formatString: 0
-		lineageTag: 6aae8d5d-5e27-4259-80e9-d18f0ade712e
+		lineageTag: ca9cca87-792f-4d62-842f-bd0dea9b8f65
 		summarizeBy: sum
 		sourceColumn: year
 
@@ -109,7 +109,7 @@ table sec_cruise_quarterly
 
 	column covid_period
 		dataType: boolean
-		lineageTag: 40b1d8d9-bf77-46f4-83ca-1550f37e43ec
+		lineageTag: 8ddbcb48-bdeb-4506-9078-c57fa683a226
 		summarizeBy: none
 		sourceColumn: covid_period
 

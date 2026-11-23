@@ -2,71 +2,134 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "page05v0500000000000",
   "position": {
-    "x": 650,
-    "y": 192,
+    "x": 20,
+    "y": 190,
     "z": 5000,
-    "height": 310,
-    "width": 610,
+    "height": 520,
+    "width": 760,
     "tabOrder": 5000
   },
   "visual": {
-    "visualType": "textbox",
-    "objects": {
-      "general": [
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "quarter"
+                }
+              },
+              "queryRef": "real_forecast_backtest.quarter",
+              "nativeQueryRef": "quarter",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "RCL Actual (SEC)"
+                }
+              },
+              "queryRef": "real_forecast_backtest.RCL Actual (SEC)",
+              "nativeQueryRef": "RCL Actual (SEC)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "RCL Model Forecast"
+                }
+              },
+              "queryRef": "real_forecast_backtest.RCL Model Forecast",
+              "nativeQueryRef": "RCL Model Forecast"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "RCL Trend Baseline"
+                }
+              },
+              "queryRef": "real_forecast_backtest.RCL Trend Baseline",
+              "nativeQueryRef": "RCL Trend Baseline"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "RCL Same Quarter Last Year"
+                }
+              },
+              "queryRef": "real_forecast_backtest.RCL Same Quarter Last Year",
+              "nativeQueryRef": "RCL Same Quarter Last Year"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "real_forecast_backtest"
+                  }
+                },
+                "Property": "quarter"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
         {
           "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "Result",
-                    "textStyle": {
-                      "fontSize": "11pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• CUPED lift: −0.54% (95% CI −1.9% to +0.8%), p = 0.43, so no significant effect.",
-                    "textStyle": {
-                      "fontSize": "11pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• CUPED (using revenue already booked at day 60) cut variance by 93%.",
-                    "textStyle": {
-                      "fontSize": "11pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Minimum detectable lift with 442 sailings: about 1.9%. Detecting +0.5% would need about 3,300 sailings per arm.",
-                    "textStyle": {
-                      "fontSize": "11pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Decision: don't roll the rule out broadly. Next, test a larger price step only on categories forecast to sell out.",
-                    "textStyle": {
-                      "fontSize": "11pt"
-                    }
-                  }
-                ]
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
               }
-            ]
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Royal Caribbean revenue per passenger day: actual vs. forecasts made one quarter ahead'"
+                }
+              }
+            }
           }
         }
       ]

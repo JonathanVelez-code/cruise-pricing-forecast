@@ -5,88 +5,33 @@
     "x": 20,
     "y": 82,
     "z": 2000,
-    "height": 420,
-    "width": 620,
+    "height": 95,
+    "width": 246.66666666666666,
     "tabOrder": 2000
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "card",
     "query": {
       "queryState": {
-        "Category": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "experiment_sailings"
-                    }
-                  },
-                  "Property": "arm"
-                }
-              },
-              "queryRef": "experiment_sailings.arm",
-              "nativeQueryRef": "arm",
-              "active": true
-            }
-          ]
-        },
-        "Y": {
+        "Values": {
           "projections": [
             {
               "field": {
                 "Measure": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "experiment_sailings"
+                      "Entity": "real_forecast_backtest"
                     }
                   },
-                  "Property": "Avg RevPAC"
+                  "Property": "Model Error %"
                 }
               },
-              "queryRef": "experiment_sailings.Avg RevPAC",
-              "nativeQueryRef": "Avg RevPAC"
-            },
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "experiment_sailings"
-                    }
-                  },
-                  "Property": "Avg RevPAC (CUPED)"
-                }
-              },
-              "queryRef": "experiment_sailings.Avg RevPAC (CUPED)",
-              "nativeQueryRef": "Avg RevPAC (CUPED)"
+              "queryRef": "real_forecast_backtest.Model Error %",
+              "nativeQueryRef": "Model Error %"
             }
           ]
         }
       }
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Revenue per available cabin: raw vs. CUPED-adjusted'"
-                }
-              }
-            }
-          }
-        }
-      ]
     },
     "drillFilterOtherVisuals": true
   }

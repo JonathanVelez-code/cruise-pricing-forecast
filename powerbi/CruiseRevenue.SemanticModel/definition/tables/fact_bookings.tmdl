@@ -1,54 +1,54 @@
 table fact_bookings
-	lineageTag: a9c2e98a-c256-4b7c-abe2-25a94b9ed887
+	lineageTag: d2ee9c29-57a9-4374-9d43-c3caaaf2891c
 
 	measure 'Total Revenue' = CALCULATE(SUM(fact_bookings[price_paid]), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
 		formatString: \$#,0
-		lineageTag: a05b3c65-ec70-4edd-b400-e5d130913c96
+		lineageTag: c6bf408b-a23c-44b2-81f8-d28422a1d68b
 
 	measure 'Cabins Booked' = CALCULATE(COUNTROWS(fact_bookings), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
 		formatString: #,0
-		lineageTag: d0ed085d-8bcb-45d5-b2d8-a4f6a245383a
+		lineageTag: fc910f63-3db3-4b01-8b38-ac7e31b092db
 
 	measure 'Cabins Available' = CALCULATE(SUM(fact_cabin_inventory[cabins_available]), dim_sailing[departed] = TRUE())
 		formatString: #,0
-		lineageTag: 6b1715ef-9a86-4d4b-8105-9916ae4b25c6
+		lineageTag: 3b6e9a4e-d46b-4835-9368-0e19251760b5
 
 	measure 'Occupancy %' = DIVIDE([Cabins Booked], [Cabins Available])
 		formatString: 0.0%
-		lineageTag: c29a319e-3d63-4f6c-860b-c37b8b95527c
+		lineageTag: 6c4a082b-1d3e-4597-afca-24435a5642b0
 
 	measure 'Guest Nights' = CALCULATE(SUMX(fact_bookings, fact_bookings[guests] * RELATED(dim_sailing[nights])), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
 		formatString: #,0
-		lineageTag: 78b9db4e-93ba-4069-9260-c96966d4bed6
+		lineageTag: ef45c383-58a0-4208-a0f6-e1c671cc47ad
 
 	measure 'Capacity Nights' = CALCULATE(SUMX(fact_cabin_inventory, fact_cabin_inventory[cabins_available] * 2 * RELATED(dim_sailing[nights])), dim_sailing[departed] = TRUE())
 		formatString: #,0
-		lineageTag: 792573ea-b042-48cb-a764-1b89449be3d4
+		lineageTag: edd571ea-6f0f-4f5c-8e21-148ba29a1dec
 
 	measure 'Load Factor' = DIVIDE([Guest Nights], [Capacity Nights])
 		formatString: 0.0%
-		lineageTag: 46ecba86-261a-4d75-9de4-6b8c0c76c91d
+		lineageTag: 4edcac7a-00e3-421a-ae80-17a671ac055b
 
 	measure 'Cabin Nights Sold' = CALCULATE(SUMX(fact_bookings, RELATED(dim_sailing[nights])), fact_bookings[status] = "confirmed", dim_sailing[departed] = TRUE())
 		formatString: #,0
-		lineageTag: 82c1537a-7be2-4bd3-a4d1-a1c3d9e249c1
+		lineageTag: b750fee9-fe49-41bb-8b3f-f4164c978459
 
 	measure 'Avg Price per Cabin-Night' = DIVIDE([Total Revenue], [Cabin Nights Sold])
 		formatString: \$#,0
-		lineageTag: 26afce94-23b2-47bd-a6ca-d1e12c6aea6a
+		lineageTag: 0f036642-7c3a-420d-bf67-4fe6601069cb
 
 	measure 'Revenue per Available Cabin' = DIVIDE([Total Revenue], [Cabins Available])
 		formatString: \$#,0
-		lineageTag: 8126d824-3fda-468a-83ed-11237191498a
+		lineageTag: 17f4f0f6-aa06-4f73-8099-b00312993124
 
 	measure 'Cancellation Rate' = DIVIDE(CALCULATE(COUNTROWS(fact_bookings), fact_bookings[status] = "cancelled"), COUNTROWS(fact_bookings))
 		formatString: 0.0%
-		lineageTag: c6447876-01f1-41e2-961f-e1962767e6b7
+		lineageTag: 954a2076-05b8-4260-a8a4-150eb18c67c6
 
 	column booking_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 2f09c8ba-2810-45ea-903a-f9115ec4b475
+		lineageTag: 8df5447f-303a-4734-bc59-7015b7df3e56
 		summarizeBy: sum
 		sourceColumn: booking_id
 
@@ -57,7 +57,7 @@ table fact_bookings
 	column guest_id
 		dataType: int64
 		formatString: 0
-		lineageTag: fdcf9562-febd-4ff0-9c21-4d06b3502e3b
+		lineageTag: a5267dcb-3358-44ee-a543-12f2217d8029
 		summarizeBy: sum
 		sourceColumn: guest_id
 
@@ -66,7 +66,7 @@ table fact_bookings
 	column sailing_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 5601acd3-58ca-4d06-a7be-4e2574bd11be
+		lineageTag: a5b61490-1e2c-4643-8562-77914d1254fd
 		summarizeBy: none
 		sourceColumn: sailing_id
 
@@ -74,7 +74,7 @@ table fact_bookings
 
 	column cabin_category
 		dataType: string
-		lineageTag: 60d73460-d8bf-4501-b80d-ba3478e3d95c
+		lineageTag: 158f5915-c7b7-4082-b58b-b726fcafae00
 		summarizeBy: none
 		sourceColumn: cabin_category
 
@@ -83,14 +83,14 @@ table fact_bookings
 	column booking_date
 		dataType: dateTime
 		formatString: yyyy-mm-dd
-		lineageTag: ab9f8bcf-e450-468b-b5fe-74323e3329fb
+		lineageTag: aac3cdb4-e2bb-4b05-bfe7-eea64b985766
 		summarizeBy: none
 		sourceColumn: booking_date
 
 		variation Variation
 			isDefault
-			relationship: a5e68729-1709-406b-a430-2c34a7f829f4
-			defaultHierarchy: LocalDateTable_cb8b85ed-9c56-41c2-a815-ee7d78fcda40.'Date Hierarchy'
+			relationship: 38ec7218-ab4c-4e07-898c-3b70e3eff234
+			defaultHierarchy: LocalDateTable_92b2d1cd-6277-428d-b97d-c61abac8bcb0.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -99,7 +99,7 @@ table fact_bookings
 	column days_out
 		dataType: int64
 		formatString: 0
-		lineageTag: 7ca9bc66-79ac-4193-a99d-7e8d1fe4dc50
+		lineageTag: df55f519-ae57-42d4-9f0c-762069986e99
 		summarizeBy: sum
 		sourceColumn: days_out
 
@@ -108,7 +108,7 @@ table fact_bookings
 	column guests
 		dataType: int64
 		formatString: 0
-		lineageTag: bed97892-0015-4f1f-85de-90b222d6a5ed
+		lineageTag: e7776565-0bd5-44a4-bd0c-8d43108e9892
 		summarizeBy: sum
 		sourceColumn: guests
 
@@ -117,7 +117,7 @@ table fact_bookings
 	column price_paid
 		dataType: double
 		formatString: \$#,0
-		lineageTag: 3b3448ee-fd36-4a86-b083-1ef5f5d086e5
+		lineageTag: 63a6cbee-127c-4805-8613-8397972712f4
 		summarizeBy: sum
 		sourceColumn: price_paid
 
@@ -125,7 +125,7 @@ table fact_bookings
 
 	column price_imputed
 		dataType: boolean
-		lineageTag: de80a90c-909d-4f1a-8973-44b03a40aefa
+		lineageTag: c3626e41-f430-4f1a-a90a-634599b5d51e
 		summarizeBy: none
 		sourceColumn: price_imputed
 
@@ -133,7 +133,7 @@ table fact_bookings
 
 	column promo_code
 		dataType: string
-		lineageTag: 46165d11-ba92-4c18-9c48-4f5441f9cf53
+		lineageTag: aec0e4e5-a991-479b-93e3-63931ed1e6e7
 		summarizeBy: none
 		sourceColumn: promo_code
 
@@ -141,7 +141,7 @@ table fact_bookings
 
 	column channel
 		dataType: string
-		lineageTag: a98ba7f7-6b79-46a3-b758-3dce48f04b2f
+		lineageTag: a6d3fc36-b378-4711-8f2f-13a9ce48d637
 		summarizeBy: none
 		sourceColumn: channel
 
@@ -149,7 +149,7 @@ table fact_bookings
 
 	column source_market
 		dataType: string
-		lineageTag: 73a79060-87ef-4f14-b238-c2bf0bcd9c34
+		lineageTag: 26280641-54a3-4078-85a1-e7d0697070bd
 		summarizeBy: none
 		sourceColumn: source_market
 
@@ -157,7 +157,7 @@ table fact_bookings
 
 	column status
 		dataType: string
-		lineageTag: ceef2fe1-791e-4c9c-bc4c-432726220b9b
+		lineageTag: 81753edf-f338-48fa-b74e-e52e0d33eecc
 		summarizeBy: none
 		sourceColumn: status
 
@@ -166,14 +166,14 @@ table fact_bookings
 	column cancel_date
 		dataType: dateTime
 		formatString: yyyy-mm-dd
-		lineageTag: 539296c1-afd6-405d-bc52-e2753636e426
+		lineageTag: 79885ac0-7acd-42f0-9e86-97502218e6ed
 		summarizeBy: none
 		sourceColumn: cancel_date
 
 		variation Variation
 			isDefault
-			relationship: 1bae0e9b-e3f3-4120-ab54-2074c785621a
-			defaultHierarchy: LocalDateTable_5bcab464-7d8f-4b14-b73a-0534c21d6ad6.'Date Hierarchy'
+			relationship: b4e46d86-dca4-4e01-bad3-a12f4e12868c
+			defaultHierarchy: LocalDateTable_344bfad9-4fb7-421a-b53b-23593f81c554.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 

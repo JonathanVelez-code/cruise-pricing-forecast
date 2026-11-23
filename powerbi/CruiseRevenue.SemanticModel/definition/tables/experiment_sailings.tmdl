@@ -1,26 +1,26 @@
 table experiment_sailings
-	lineageTag: 2aab1fc4-12b0-4739-b7e6-ce06e8d5d61a
+	lineageTag: cb7c2fab-10aa-4643-b789-afd67bd61141
 
 	measure 'Avg RevPAC' = AVERAGE(experiment_sailings[revpac])
 		formatString: \$#,0
-		lineageTag: efdaedd3-7ec3-4d29-8c11-3425f0510059
+		lineageTag: 9b2f831e-da44-4120-9ddf-c78efd1dc803
 
 	measure 'Avg RevPAC (CUPED)' = AVERAGE(experiment_sailings[revpac_cuped])
 		formatString: \$#,0
-		lineageTag: c71f544f-ca8b-4aa1-ae75-4da0bb86c2ed
+		lineageTag: 96f45730-a7f2-486e-bb21-69919900a96b
 
 	measure 'Test Sailings' = COUNTROWS(experiment_sailings)
 		formatString: #,0
-		lineageTag: 737898ec-c5b2-4856-9b79-21fe550dce50
+		lineageTag: 88f0e075-849f-4126-a6ee-2b7791767787
 
 	measure 'Avg Final Occupancy' = AVERAGE(experiment_sailings[final_occupancy])
 		formatString: 0.0%
-		lineageTag: c27f787a-e4fb-44ab-9f10-fad2cb572e44
+		lineageTag: 57a37933-85fc-43c8-bc59-ad25634659b4
 
 	column sailing_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 0cc709e1-e5a7-47ab-b238-229b7b6c7210
+		lineageTag: 73901dff-9fe8-4e18-baca-a00b273860bb
 		summarizeBy: none
 		sourceColumn: sailing_id
 
@@ -29,14 +29,14 @@ table experiment_sailings
 	column sail_date
 		dataType: dateTime
 		formatString: yyyy-mm-dd
-		lineageTag: 02b3bfcd-c06b-4ff9-8a33-c0da59951fdd
+		lineageTag: f1ecf244-0501-472b-bc50-ac86c9767af2
 		summarizeBy: none
 		sourceColumn: sail_date
 
 		variation Variation
 			isDefault
-			relationship: cda958d9-bd99-48b2-a70e-3af0b8331365
-			defaultHierarchy: LocalDateTable_73470a3c-f63c-48f8-b3c8-33369d2efa27.'Date Hierarchy'
+			relationship: 884d3537-1fb1-40ad-99ac-e22333c5b806
+			defaultHierarchy: LocalDateTable_ba73ba21-6ad6-4e51-89f9-09d7ad710717.'Date Hierarchy'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -44,7 +44,7 @@ table experiment_sailings
 
 	column arm
 		dataType: string
-		lineageTag: e41582c4-c214-4008-a7f4-1d7855b2d005
+		lineageTag: 312211c7-2942-42b7-b3c5-fab0e9940887
 		summarizeBy: none
 		sourceColumn: arm
 
@@ -53,7 +53,7 @@ table experiment_sailings
 	column categories
 		dataType: int64
 		formatString: 0
-		lineageTag: d6b15077-d2b6-4bad-8bd4-b52d996e6c0d
+		lineageTag: 36d8abe8-99fc-489f-ae96-230e71032440
 		summarizeBy: sum
 		sourceColumn: categories
 
@@ -62,7 +62,7 @@ table experiment_sailings
 	column cabins_available
 		dataType: int64
 		formatString: 0
-		lineageTag: 68c22ee9-dd45-48a2-831c-8c03253347e3
+		lineageTag: 580ee58b-b2a5-44bb-af01-0b2017c4b9ef
 		summarizeBy: sum
 		sourceColumn: cabins_available
 
@@ -70,7 +70,7 @@ table experiment_sailings
 
 	column otb
 		dataType: double
-		lineageTag: 0a1ec855-b53c-48b4-b195-d149773f1d18
+		lineageTag: ea9c8771-29af-4245-ba34-1c293f8f78ad
 		summarizeBy: sum
 		sourceColumn: otb
 
@@ -78,7 +78,7 @@ table experiment_sailings
 
 	column otb_revenue
 		dataType: double
-		lineageTag: 49899f1d-bbb2-4f60-a0ea-9c25469e0d35
+		lineageTag: 3b4c6e6a-d8a0-48e7-b573-3c31ae0bce31
 		summarizeBy: sum
 		sourceColumn: otb_revenue
 
@@ -86,7 +86,7 @@ table experiment_sailings
 
 	column final_cabins
 		dataType: double
-		lineageTag: da3f176a-7897-4a33-b5d5-4ddcf2d739f9
+		lineageTag: b76eb133-1b7b-483a-b849-e833ad25f585
 		summarizeBy: sum
 		sourceColumn: final_cabins
 
@@ -94,7 +94,7 @@ table experiment_sailings
 
 	column revenue
 		dataType: double
-		lineageTag: 564799e2-4a3d-4afe-bfba-852ed546c27a
+		lineageTag: 942b8b13-d9ee-43ea-b044-ccb3207286c2
 		summarizeBy: sum
 		sourceColumn: revenue
 
@@ -102,7 +102,7 @@ table experiment_sailings
 
 	column revpac
 		dataType: double
-		lineageTag: e4688ed5-ea48-497d-9059-60a3725f9f70
+		lineageTag: 4ae32d89-da67-41a6-a13e-49eac6171045
 		summarizeBy: sum
 		sourceColumn: revpac
 
@@ -110,7 +110,7 @@ table experiment_sailings
 
 	column pre_revpac
 		dataType: double
-		lineageTag: 720f1625-ef8a-47c6-a50e-b75dbce89959
+		lineageTag: 2f4a37d9-1745-40ba-a285-658b4e0c6ada
 		summarizeBy: sum
 		sourceColumn: pre_revpac
 
@@ -118,7 +118,7 @@ table experiment_sailings
 
 	column final_occupancy
 		dataType: double
-		lineageTag: a6453882-ea31-41ca-9fed-0e57dede908d
+		lineageTag: 3989d801-9231-4f1c-a02a-9b340de95451
 		summarizeBy: sum
 		sourceColumn: final_occupancy
 
@@ -126,7 +126,7 @@ table experiment_sailings
 
 	column revpac_cuped
 		dataType: double
-		lineageTag: 18eb86ce-6c19-42d2-b128-d8a8f7f09ab8
+		lineageTag: 21742d88-baae-475f-a37e-a0485cc32ff0
 		summarizeBy: sum
 		sourceColumn: revpac_cuped
 

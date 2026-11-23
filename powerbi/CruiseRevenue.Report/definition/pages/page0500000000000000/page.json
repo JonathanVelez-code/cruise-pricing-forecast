@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
   "name": "page0500000000000000",
-  "displayName": "Pricing A/B Test",
+  "displayName": "Royal Caribbean Real Forecast",
   "displayOption": "FitToPage",
   "height": 720,
   "width": 1280

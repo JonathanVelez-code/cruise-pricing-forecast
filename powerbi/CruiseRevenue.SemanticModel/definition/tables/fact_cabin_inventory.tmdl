@@ -1,10 +1,10 @@
 table fact_cabin_inventory
-	lineageTag: ca26e268-7f88-497a-9bbe-2da565725325
+	lineageTag: 520e7686-b8e7-4ffe-84ff-75c632d58688
 
 	column sailing_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 27a9231c-0cda-44dd-aee5-f3004a403d54
+		lineageTag: 7be85d67-2518-46fe-bab5-9408271b9916
 		summarizeBy: none
 		sourceColumn: sailing_id
 
@@ -12,7 +12,7 @@ table fact_cabin_inventory
 
 	column cabin_category
 		dataType: string
-		lineageTag: 0ce8b466-67f5-4454-9359-a24c142bbbdb
+		lineageTag: 311930dc-0841-48cd-ac87-1154b07a86da
 		summarizeBy: none
 		sourceColumn: cabin_category
 
@@ -21,7 +21,7 @@ table fact_cabin_inventory
 	column cabins_available
 		dataType: int64
 		formatString: 0
-		lineageTag: d0aae7d0-e016-44e6-b22d-0afb9075be9a
+		lineageTag: 557650c4-907b-4bdc-8ee5-fe9964655297
 		summarizeBy: sum
 		sourceColumn: cabins_available
 

@@ -1,9 +1,9 @@
 table feature_importance
-	lineageTag: 86c15279-c5a0-4c55-bdab-4fdb523a05f9
+	lineageTag: 8726528f-5e16-4ed7-bbab-d89e43c815a4
 
 	column feature
 		dataType: string
-		lineageTag: 49f3a4dc-f683-4817-aa7b-23eb92dbb7a8
+		lineageTag: c8f9cd28-8a7a-4a54-bac5-087b10d8aa12
 		summarizeBy: none
 		sourceColumn: feature
 
@@ -11,7 +11,7 @@ table feature_importance
 
 	column importance
 		dataType: double
-		lineageTag: df576069-79d1-4256-a135-c2cd5388fdb8
+		lineageTag: ac908e96-e4d8-4823-abda-fbfdbe9b94c1
 		summarizeBy: sum
 		sourceColumn: importance
 

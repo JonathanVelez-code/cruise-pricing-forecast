@@ -2,41 +2,102 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
   "name": "page05v0600000000000",
   "position": {
-    "x": 20,
-    "y": 512,
+    "x": 790,
+    "y": 82,
     "z": 6000,
-    "height": 198,
-    "width": 1240,
+    "height": 300,
+    "width": 470,
     "tabOrder": 6000
   },
   "visual": {
-    "visualType": "textbox",
-    "objects": {
-      "general": [
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "company"
+                }
+              },
+              "queryRef": "real_forecast_backtest.company",
+              "nativeQueryRef": "company",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "Model Error %"
+                }
+              },
+              "queryRef": "real_forecast_backtest.Model Error %",
+              "nativeQueryRef": "Model Error %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "Trend Baseline Error %"
+                }
+              },
+              "queryRef": "real_forecast_backtest.Trend Baseline Error %",
+              "nativeQueryRef": "Trend Baseline Error %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "real_forecast_backtest"
+                    }
+                  },
+                  "Property": "Last-Year Baseline Error %"
+                }
+              },
+              "queryRef": "real_forecast_backtest.Last-Year Baseline Error %",
+              "nativeQueryRef": "Last-Year Baseline Error %"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
         {
           "properties": {
-            "paragraphs": [
-              {
-                "textRuns": [
-                  {
-                    "value": "Why randomize by sailing? Two guests on the same sailing never see different prices for the same cabin.",
-                    "textStyle": {
-                      "fontSize": "11pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Why no lift? Late bookings are only about 17% of revenue, and a 5% increase mostly trades bookings for price.",
-                    "textStyle": {
-                      "fontSize": "11pt"
-                    }
-                  }
-                ]
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
               }
-            ]
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Forecast error by cruise line (lower is better)'"
+                }
+              }
+            }
           }
         }
       ]

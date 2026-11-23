@@ -1,10 +1,10 @@
 table dim_sailing
-	lineageTag: f9d40e8e-3f7c-4a95-bedc-406622b0beb9
+	lineageTag: d9495fbb-3a94-44ca-9def-80f4e5f621cf
 
 	column sailing_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 02650fed-1442-4dff-82a7-afbc2a76e617
+		lineageTag: 0b3b4e0d-578f-470c-9c5a-83011f0ba252
 		summarizeBy: none
 		sourceColumn: sailing_id
 
@@ -13,7 +13,7 @@ table dim_sailing
 	column ship_id
 		dataType: int64
 		formatString: 0
-		lineageTag: cd49105e-db15-46a6-ab66-beac0d710c6d
+		lineageTag: 501fb5df-7a4d-4fed-86a1-45b9cf5db909
 		summarizeBy: none
 		sourceColumn: ship_id
 
@@ -22,7 +22,7 @@ table dim_sailing
 	column sail_date
 		dataType: dateTime
 		formatString: yyyy-mm-dd
-		lineageTag: 77b5a2b6-714d-427d-8110-7a695e25e74c
+		lineageTag: b0ec16c7-2175-44ef-8da2-3eca31156b8d
 		summarizeBy: none
 		sourceColumn: sail_date
 
@@ -33,7 +33,7 @@ table dim_sailing
 	column nights
 		dataType: int64
 		formatString: 0
-		lineageTag: f5d5923d-294b-4b77-b881-25dc526de4df
+		lineageTag: 2bd9d3cf-56a6-4895-9d5c-9ce06ecd480d
 		summarizeBy: sum
 		sourceColumn: nights
 
@@ -41,7 +41,7 @@ table dim_sailing
 
 	column itinerary
 		dataType: string
-		lineageTag: acbc92aa-538b-489e-a1c3-b57e7ba061d5
+		lineageTag: 8bcc9d84-0cbf-4ed3-9515-33a85df160ff
 		summarizeBy: none
 		sourceColumn: itinerary
 
@@ -49,7 +49,7 @@ table dim_sailing
 
 	column ship_name
 		dataType: string
-		lineageTag: 9ef67dda-80a1-4f5f-a6a2-666b5b37942b
+		lineageTag: 4210088c-9e09-4003-8c32-cc3c600111a5
 		summarizeBy: none
 		sourceColumn: ship_name
 
@@ -57,7 +57,7 @@ table dim_sailing
 
 	column brand
 		dataType: string
-		lineageTag: 885d72b7-911a-4af0-807e-7c763ebf4265
+		lineageTag: 3ef52860-a08e-4018-a288-e5b330c23f79
 		summarizeBy: none
 		sourceColumn: brand
 
@@ -65,7 +65,7 @@ table dim_sailing
 
 	column trip_type
 		dataType: string
-		lineageTag: baaa9918-36f8-4b72-9bef-2dd971874b62
+		lineageTag: 37f3a07f-5186-4533-84b0-47242263b47b
 		summarizeBy: none
 		sourceColumn: trip_type
 
@@ -73,7 +73,7 @@ table dim_sailing
 
 	column departed
 		dataType: boolean
-		lineageTag: 1facd37b-1eaa-4eaf-8bc3-e736452dc59d
+		lineageTag: 4151f081-ba33-49c5-9815-9f6108a699d8
 		summarizeBy: none
 		sourceColumn: departed
 
@@ -82,7 +82,7 @@ table dim_sailing
 	column sail_year
 		dataType: int64
 		formatString: 0
-		lineageTag: c69d751b-c79d-48e0-b401-4ffb9d22bc1d
+		lineageTag: a2c444c9-fb61-4126-9f5c-99ed737f8625
 		summarizeBy: sum
 		sourceColumn: sail_year
 
@@ -91,7 +91,7 @@ table dim_sailing
 	column sail_month
 		dataType: int64
 		formatString: 0
-		lineageTag: 39b11b2a-746b-48a2-9270-e571e4ebaed7
+		lineageTag: 782b6cb7-6f16-434c-b169-dc002d4a46e0
 		summarizeBy: sum
 		sourceColumn: sail_month
 

@@ -11,7 +11,7 @@ annotation __PBI_TimeIntelligenceEnabled = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBI_QueryOrder = ["fact_bookings","fact_cabin_inventory","dim_sailing","dim_date","forecast_open_sailings","backtest_by_horizon","feature_importance","experiment_sailings","sec_cruise_quarterly","calibration_vs_sec","sql_customer_acquisition","DataFolder"]
+annotation PBI_QueryOrder = ["fact_bookings","fact_cabin_inventory","dim_sailing","dim_date","forecast_open_sailings","backtest_by_horizon","feature_importance","experiment_sailings","sec_cruise_quarterly","calibration_vs_sec","sql_customer_acquisition","DataFolder","real_forecast_backtest"]
 
 ref table fact_bookings
 ref table fact_cabin_inventory
@@ -24,12 +24,13 @@ ref table experiment_sailings
 ref table sec_cruise_quarterly
 ref table calibration_vs_sec
 ref table sql_customer_acquisition
-ref table DateTableTemplate_ea54d7de-feaa-4011-9143-ae6dedaa16d2
-ref table LocalDateTable_cb8b85ed-9c56-41c2-a815-ee7d78fcda40
-ref table LocalDateTable_5bcab464-7d8f-4b14-b73a-0534c21d6ad6
-ref table LocalDateTable_89b363b9-72d4-4b05-a5e6-762e93bede42
-ref table LocalDateTable_73470a3c-f63c-48f8-b3c8-33369d2efa27
-ref table LocalDateTable_d0d9b00a-c20e-4e65-ac15-894cec572900
+ref table real_forecast_backtest
+ref table DateTableTemplate_e757e934-5d3f-42fb-b921-f95a82013191
+ref table LocalDateTable_92b2d1cd-6277-428d-b97d-c61abac8bcb0
+ref table LocalDateTable_344bfad9-4fb7-421a-b53b-23593f81c554
+ref table LocalDateTable_806bd661-de80-47d6-932f-ae6298cb4fb4
+ref table LocalDateTable_ba73ba21-6ad6-4e51-89f9-09d7ad710717
+ref table LocalDateTable_7d2581af-0e25-42da-9960-ef936cb56d63
 
 ref cultureInfo en-US
 

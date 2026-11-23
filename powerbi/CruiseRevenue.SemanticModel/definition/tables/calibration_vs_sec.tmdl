@@ -1,25 +1,25 @@
 table calibration_vs_sec
-	lineageTag: d9e6d464-10c3-430e-bbdd-888df5973812
+	lineageTag: d502b5d7-705f-46a5-a606-63f7934fe70f
 
 	measure 'This project (synthetic)' = SUM(calibration_vs_sec[synthetic])
 		formatString: 0.0
-		lineageTag: 2129241d-5332-4e4f-b5c1-6eb226ebbac7
+		lineageTag: 3e9cc2d9-214d-4a93-bf15-de1640f9a460
 
 	measure 'Royal Caribbean (SEC)' = SUM(calibration_vs_sec[Royal Caribbean])
 		formatString: 0.0
-		lineageTag: 3efd4f26-a79e-4571-a26a-d6b0ba5d4eda
+		lineageTag: de0f7f75-295c-429b-b34e-a23c1f8ed09c
 
 	measure 'Norwegian (SEC)' = SUM(calibration_vs_sec[Norwegian])
 		formatString: 0.0
-		lineageTag: 74bda6f1-dade-45d0-b7f7-5c232a1e23cb
+		lineageTag: bbbd6331-7ed3-4419-be70-dc737045e030
 
 	measure 'Carnival (SEC)' = SUM(calibration_vs_sec[Carnival])
 		formatString: 0.0
-		lineageTag: a50ca4cf-13b6-40ca-b2cd-bd24a793b7fb
+		lineageTag: acd2bc77-bd34-443b-a190-a3a5b20454c9
 
 	column quarter
 		dataType: string
-		lineageTag: 845bd051-1b2d-490c-85c8-702840363c45
+		lineageTag: c0a7306d-8231-40ea-a51e-588995f85829
 		summarizeBy: none
 		sourceColumn: quarter
 
@@ -27,7 +27,7 @@ table calibration_vs_sec
 
 	column synthetic
 		dataType: double
-		lineageTag: e351fae3-0f57-4cfe-a215-5e905091cde7
+		lineageTag: f825fa03-8707-44b4-a738-b7b453883df9
 		summarizeBy: sum
 		sourceColumn: synthetic
 
@@ -35,7 +35,7 @@ table calibration_vs_sec
 
 	column Carnival
 		dataType: double
-		lineageTag: a601a7b9-468b-483e-ad04-bb02044ce00f
+		lineageTag: baf89465-2320-4131-9e87-dded9c05c014
 		summarizeBy: sum
 		sourceColumn: Carnival
 
@@ -43,7 +43,7 @@ table calibration_vs_sec
 
 	column Norwegian
 		dataType: double
-		lineageTag: b86d9a02-0bd7-4b9d-bf3d-810d7a505933
+		lineageTag: 5a3bd837-196b-439b-a313-faad688b0bab
 		summarizeBy: sum
 		sourceColumn: Norwegian
 
@@ -51,7 +51,7 @@ table calibration_vs_sec
 
 	column 'Royal Caribbean'
 		dataType: double
-		lineageTag: 93b7f4e7-6c34-4d9c-aef4-5f4f3806d406
+		lineageTag: 81368642-8320-44ec-a1e2-f196600a5653
 		summarizeBy: sum
 		sourceColumn: Royal Caribbean
 
