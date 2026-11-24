@@ -99,15 +99,20 @@ To check a number yourself: open the filing and search for "Passenger Cruise Day
 
 **Ships sail more than full in every quarter.** Average occupancy outside COVID-19 is about **102–112%**. Q3, with summer family travel, is the peak, and Q1/Q4 are the lows.
 
-**Growth since 2019 came from price, not from filling more cabins:**
+**Since 2019, Royal Caribbean has held its pricing power better than its competitors:**
 
 | Company | Occupancy, 2019 avg → last 4 quarters | Revenue per PCD, 2019 avg → last 4 quarters |
 |---|---|---|
-| **Royal Caribbean** | 108.1% → 109.7% | $243.8 → $309.7 (**+27%**) |
-| Norwegian | 107.4% → 103.6% | $312.7 → $376.0 (+20%) |
-| Carnival | 107.7% → 105.1% | $225.3 → $267.9 (+19%) |
+| **Royal Caribbean** | 108.1% → 109.7% (**fuller**) | $243.8 → $309.7 (**+27%**) |
+| Norwegian | 107.4% → 103.6% (less full) | $312.7 → $376.0 (+20%) |
+| Carnival | 107.7% → 105.1% (less full) | $225.3 → $267.9 (+19%) |
+| *For reference: U.S. consumer prices (CPI-U)* | | *+29%* |
 
-Royal Caribbean has grown revenue per guest-day the most of the three, while keeping its ships at least as full as before. That is the work of pricing and revenue management.
+These are nominal dollars. U.S. consumer prices rose about 29% over the same period (BLS CPI-U, series [CUUR0000SA0](https://data.bls.gov/timeseries/CUUR0000SA0): the 2019 average vs. Oct 2025 – Sep 2026, with Oct 2025 unpublished). So after inflation:
+- **Royal Caribbean roughly kept pace with inflation**, and it's the only one of the three whose ships are fuller than in 2019.
+- **Carnival and Norwegian fell behind inflation by about 8–9 points**, and their ships are less full.
+
+Royal Caribbean charged more and still filled its ships, while its two competitors lost ground on both. That is the work of pricing and revenue management.
 
 ---
 
@@ -199,6 +204,6 @@ A citation for each of the 102 filings is in [SEC_FILINGS.md](SEC_FILINGS.md#cit
 **Economic data**
 
 10. U.S. Bureau of Labor Statistics. *Consumer Price Index for All Urban Consumers: Airline Fares in U.S. City Average, Seasonally Adjusted* (Series CUSR0000SETG01). https://data.bls.gov/timeseries/CUSR0000SETG01
-11. U.S. Bureau of Labor Statistics. *Labor Force Statistics from the Current Population Survey: Unemployment Rate, Seasonally Adjusted* (Series LNS14000000). https://data.bls.gov/timeseries/LNS14000000
-12. U.S. Bureau of Labor Statistics. *Public Data API*. https://www.bls.gov/developers/
+11. U.S. Bureau of Labor Statistics. *Labor Force Statistics from the Current Population Survey: Unemployment Rate, Seasonally Adjusted* (Series LNS14000000). https://data.bls.gov/timeseries/LNS1400000012. U.S. Bureau of Labor Statistics. *Public Data API*. https://www.bls.gov/developers/
 13. University of Michigan, Surveys of Consumers. *Index of Consumer Sentiment* (monthly). https://www.sca.isr.umich.edu/ (data file: https://www.sca.isr.umich.edu/files/tbmics.csv)
+14. U.S. Bureau of Labor Statistics. *Consumer Price Index for All Urban Consumers (CPI-U): All Items in U.S. City Average, Not Seasonally Adjusted* (Series CUUR0000SA0). Used only for the inflation comparison in §6. https://data.bls.gov/timeseries/CUUR0000SA0
